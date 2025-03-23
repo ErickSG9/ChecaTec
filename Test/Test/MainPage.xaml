@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.MainPage"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- ENCABEZADO AZUL -->
+        <Grid BackgroundColor="#007AFF" Padding="15" HeightRequest="80">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image Source="logo.png" HeightRequest="40" VerticalOptions="Center"/>
+            <Image Source="perfil.png" HeightRequest="40" Grid.Column="1" VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- FONDO + BOTONES -->
+        <Grid Grid.Row="1">
+            <!-- Fondo difuminado -->
+            <Image Source="fondo_medico.png"
+                   Aspect="AspectFill"
+                   Opacity="0.1"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+            <!-- Botones -->
+            <StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+                <Button Text="MENSAJES" Clicked="OnMensajesClicked" Style="{StaticResource MenuButtonStyle}" />
+                <Button Text="ESTADÍSTICAS" Clicked="OnEstadisticasClicked" Style="{StaticResource MenuButtonStyle}" />
+                <Button Text="RECETA MÉDICA" Clicked="OnRecetaClicked" Style="{StaticResource MenuButtonStyle}" />
+                <Button Text="PERSONAL MÉDICO" Clicked="OnPersonalClicked" Style="{StaticResource MenuButtonStyle}" />
+            </StackLayout>
+        </Grid>
+
+        <!-- AYUDA -->
+        <Label Grid.Row="2"
+               Text="? Ayuda"
+               FontSize="Small"
+               TextColor="Black"
+               HorizontalOptions="End"
+               Margin="10"/>
+    </Grid>
+</ContentPage>

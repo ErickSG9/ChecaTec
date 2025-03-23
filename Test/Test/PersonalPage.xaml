@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.PersonalPage"
+             Title="Personal Médico"
+             BackgroundColor="White">
+
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="Equipo Médico"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <CollectionView x:Name="DoctoresList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
+                        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                            <!-- Imagen -->
+                            <Image Source="{Binding Foto}" WidthRequest="60" HeightRequest="60" Margin="5"/>
+
+                            <!-- Info -->
+                            <StackLayout Grid.Column="1" Spacing="2" Padding="5">
+                                <Label Text="{Binding Nombre}" FontSize="16" FontAttributes="Bold"/>
+                                <Label Text="{Binding Especialidad}" FontSize="14" TextColor="Gray"/>
+                            </StackLayout>
+
+                            <!-- Botón -->
+                            <Button Grid.Column="2" Text="Ver" Clicked="VerDoctor_Clicked"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

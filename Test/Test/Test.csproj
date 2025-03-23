@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="EstadisticasPage.xaml.cs">
+      <DependentUpon>EstadisticasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PersonalPage.xaml.cs">
+      <DependentUpon>PersonalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="RecetaPage.xaml.cs">
+      <DependentUpon>RecetaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MensajesPage.xaml.cs">
+      <DependentUpon>MensajesPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

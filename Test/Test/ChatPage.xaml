@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.ChatPage"
+             BackgroundColor="White">
+
+    <StackLayout Padding="10" Spacing="10">
+        <!-- Nombre del médico -->
+        <Label x:Name="NombreDoctor"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center"/>
+
+        <!-- Mensajes -->
+        <ScrollView>
+            <StackLayout x:Name="MensajesStack" Spacing="5">
+                <!-- Aquí se agregan los mensajes -->
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Entrada de texto -->
+        <StackLayout Orientation="Horizontal" Spacing="5">
+            <Entry x:Name="MensajeEntry" Placeholder="Escribe un mensaje..." HorizontalOptions="FillAndExpand"/>
+            <Button Text="Enviar" Clicked="EnviarMensaje_Clicked"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

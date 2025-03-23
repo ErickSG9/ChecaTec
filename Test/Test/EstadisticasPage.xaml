@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.EstadisticasPage"
+             Title="Estadísticas"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <StackLayout Padding="10" Spacing="20">
+
+            <!-- Tarjeta de reporte -->
+            <Frame CornerRadius="15" BorderColor="Black" Padding="15">
+                <StackLayout Spacing="10">
+                    <Label Text="Reporte 15/03/2025" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+
+                    <Label Text="BIOMETRIA HEMATICA COMPLETA" FontAttributes="Bold" FontSize="14"/>
+
+                    <Grid ColumnDefinitions="*,Auto" RowSpacing="5">
+                        <Label Text="GLOBULOS ROJOS"/>
+                        <Label Text="5.47" Grid.Column="1"/>
+                        <Label Text="HEMATOCRITO"/>
+                        <Label Text="46.5" Grid.Column="1"/>
+                        <Label Text="HEMOGLOBINA"/>
+                        <Label Text="15.5" Grid.Column="1"/>
+                        <Label Text="V.C.M."/>
+                        <Label Text="84.9" Grid.Column="1"/>
+                        <Label Text="V.H.M.B"/>
+                        <Label Text="33.3" Grid.Column="1"/>
+                        <Label Text="H.C.M"/>
+                        <Label Text="28.3" Grid.Column="1"/>
+                        <Label Text="LEUCOCITOS"/>
+                        <Label Text="6400" Grid.Column="1"/>
+                        <Label Text="LINFOCITOS"/>
+                        <Label Text="31" Grid.Column="1"/>
+                        <Label Text="MONOCITOS"/>
+                        <Label Text="3" Grid.Column="1"/>
+                        <Label Text="EOSINOFILOS"/>
+                        <Label Text="2" Grid.Column="1"/>
+                        <Label Text="SEGMENTADOS"/>
+                        <Label Text="64" Grid.Column="1"/>
+                        <Label Text="BANDA"/>
+                        <Label Text="0" Grid.Column="1"/>
+                        <Label Text="NEUTROFILOS"/>
+                        <Label Text="64" Grid.Column="1"/>
+                        <Label Text="PLAQUETAS"/>
+                        <Label Text="215000" Grid.Column="1"/>
+                        <Label Text="GLUCOSA"/>
+                        <Label Text="90.0" Grid.Column="1"/>
+                        <Label Text="COLESTEROL TOTAL"/>
+                        <Label Text="199.0" Grid.Column="1"/>
+                        <Label Text="TIPO SANGUINEO"/>
+                        <Label Text="O" Grid.Column="1"/>
+                        <Label Text="FACTOR RH"/>
+                        <Label Text="POSITIVO" Grid.Column="1"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <!-- Segunda tarjeta (puedes repetir con nuevos valores) -->
+            <Frame CornerRadius="15" BorderColor="Black" Padding="15">
+                <StackLayout Spacing="10">
+                    <Label Text="Reporte 18/03/2025" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+
+                    <Label Text="BIOMETRIA HEMATICA COMPLETA" FontAttributes="Bold" FontSize="14"/>
+
+                    <Grid ColumnDefinitions="*,Auto" RowSpacing="5">
+                        <Label Text="GLOBULOS ROJOS"/>
+                        <Label Text="5.47" Grid.Column="1"/>
+                        <Label Text="HEMATOCRITO"/>
+                        <Label Text="46.5" Grid.Column="1"/>
+                        <Label Text="HEMOGLOBINA"/>
+                        <Label Text="15.5" Grid.Column="1"/>
+                        <Label Text="V.C.M."/>
+                        <Label Text="84.9" Grid.Column="1"/>
+                        <Label Text="V.H.M.B"/>
+                        <Label Text="33.3" Grid.Column="1"/>
+                        <Label Text="H.C.M"/>
+                        <Label Text="28.3" Grid.Column="1"/>
+                        <Label Text="LEUCOCITOS"/>
+                        <Label Text="6400" Grid.Column="1"/>
+                        <Label Text="LINFOCITOS"/>
+                        <Label Text="31" Grid.Column="1"/>
+                        <Label Text="MONOCITOS"/>
+                        <Label Text="3" Grid.Column="1"/>
+                        <Label Text="EOSINOFILOS"/>
+                        <Label Text="2" Grid.Column="1"/>
+                        <Label Text="SEGMENTADOS"/>
+                        <Label Text="64" Grid.Column="1"/>
+                        <Label Text="BANDA"/>
+                        <Label Text="0" Grid.Column="1"/>
+                        <Label Text="NEUTROFILOS"/>
+                        <Label Text="64" Grid.Column="1"/>
+                        <Label Text="PLAQUETAS"/>
+                        <Label Text="215000" Grid.Column="1"/>
+                        <Label Text="GLUCOSA"/>
+                        <Label Text="90.0" Grid.Column="1"/>
+                        <Label Text="COLESTEROL TOTAL"/>
+                        <Label Text="199.0" Grid.Column="1"/>
+                        <Label Text="TIPO SANGUINEO"/>
+                        <Label Text="O" Grid.Column="1"/>
+                        <Label Text="FACTOR RH"/>
+                        <Label Text="POSITIVO" Grid.Column="1"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
