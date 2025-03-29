@@ -1,5 +1,6 @@
 ﻿using System;
 using Test.Views;
+using Test;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace Test
         public App()
         {
             InitializeComponent();
-
+            Database.InitializeDatabase();
             MainPage = new NavigationPage(new LoginPage());
         }
 
