@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.Views.LoginPage"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <StackLayout Padding="30" Spacing="15" VerticalOptions="Center">
+
+            <!-- Logo -->
+            <Image Source="logo.png"
+                   HeightRequest="120"
+                   HorizontalOptions="Center"
+                   Margin="0,30,0,20"/>
+
+            <!-- Usuario / Correo -->
+            <Label Text="Usuario o Correo"
+                   TextColor="Black"/>
+            <Entry x:Name="entryUsuario"
+                   Placeholder="Usuario o Correo"
+                   Keyboard="Email"
+                   TextColor="Black"
+                   BackgroundColor="#f0f0f0"/>
+
+            <!-- Contraseña -->
+            <Label Text="Contraseña"
+                   TextColor="Black"/>
+            <Entry x:Name="entryContrasena"
+                   Placeholder="Contraseña"
+                   IsPassword="True"
+                   TextColor="Black"
+                   BackgroundColor="#f0f0f0"/>
+
+            <!-- Botón Iniciar Sesión -->
+            <Button Text="Iniciar Sesión"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="IniciarSesion_Clicked"/>
+
+            <!-- Botón Registrarse -->
+            <Button Text="Registrarse"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="Registrarse_Clicked"/>
+
+            <!-- Olvidé contraseña -->
+            <Label Text="¿Olvidaste tu contraseña?"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   FontSize="Small"
+                   Margin="0,10,0,0"/>
+
+            <!-- Ayuda -->
+            <Label Text="¿Necesitas ayuda?"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   FontSize="Small"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
