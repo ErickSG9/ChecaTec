@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.UsuariosPage"
+             Title="Usuarios Registrados"
+             BackgroundColor="White">
+
+    <StackLayout Padding="10">
+
+        <Label Text="Lista de Usuarios"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <ListView x:Name="usuariosListView"
+                  HasUnevenRows="True"
+                  SeparatorColor="Gray">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" BackgroundColor="#f2f2f2" Margin="0,5">
+                            <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Email}"/>
+                            <Label Text="{Binding Contrasena}"/>
+                            <Label Text="{Binding Rol}"/>
+                            <Label Text="{Binding FechaRegistro, StringFormat='Registrado el: {0:dd/MM/yyyy}'}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>

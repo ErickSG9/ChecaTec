@@ -1,8 +1,8 @@
 ﻿using System;
 using Test.Views;
-using Test;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Test.Data;
 
 namespace Test
 {

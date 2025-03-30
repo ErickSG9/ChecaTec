@@ -50,7 +50,7 @@
                     BackgroundColor="#007AFF"
                     TextColor="White"
                     CornerRadius="10"
-                    Clicked="Registrarse_Clicked"/>
+                    Clicked="IrARegistro_Clicked"/>
 
             <!-- Olvidé contraseña -->
             <Label Text="¿Olvidaste tu contraseña?"

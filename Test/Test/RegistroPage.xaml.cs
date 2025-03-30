@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Test.Views;
+using Test.Data;
+using Test.Models;
 
 namespace Test
 {
@@ -15,7 +17,11 @@ namespace Test
         {
             InitializeComponent();
         }
-
+        private void VerContrasena_Clicked(object sender, EventArgs e)
+        {
+            entryContrasena.IsPassword = !entryContrasena.IsPassword;
+            btnVerContrasena.Text = entryContrasena.IsPassword ? "👁️" : "🙈";
+        }
         private async void RegistrarUsuario_Clicked(object sender, EventArgs e)
         {
             try
@@ -35,7 +41,7 @@ namespace Test
                 }
 
                 // Registrar en SQLite
-                //Database.RegistrarUsuario(nombre, email, contrasena, rol);
+                Database.RegistrarUsuario(nombre, email, contrasena, rol);
 
                 await DisplayAlert("Éxito", "Usuario registrado correctamente", "OK");
 

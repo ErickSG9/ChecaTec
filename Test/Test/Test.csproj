@@ -24,6 +24,9 @@
     <Compile Update="EstadisticasPage.xaml.cs">
       <DependentUpon>EstadisticasPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="UsuariosPage.xaml.cs">
+      <DependentUpon>UsuariosPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="PersonalPage.xaml.cs">
       <DependentUpon>PersonalPage.xaml</DependentUpon>
     </Compile>

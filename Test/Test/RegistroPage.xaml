@@ -15,7 +15,10 @@
 
         <Label Text="Contraseña" TextColor="Black"/>
         <Entry x:Name="entryContrasena" Placeholder="Contraseña" IsPassword="True" TextColor="Black" BackgroundColor="#f0f0f0"/>
-
+        <Button x:Name="btnVerContrasena"
+            Text="👁️"
+            BackgroundColor="Transparent"
+            Clicked="VerContrasena_Clicked"/>
         <Label Text="Rol" TextColor="Black"/>
         <Picker x:Name="pickerRol">
             <Picker.ItemsSource>

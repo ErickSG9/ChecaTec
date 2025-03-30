@@ -19,6 +19,10 @@ namespace Test
         {
             await Navigation.PushAsync(new MensajesPage());
         }
+        private async void OnDBClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UsuariosPage());
+        }
 
         private async void OnEstadisticasClicked(object sender, EventArgs e)
         {
@@ -42,7 +46,6 @@ namespace Test
             {
                 Application.Current.MainPage = new NavigationPage(new LoginPage()); // Redirigir al login
             }
-            // Si elige "Cancelar", no se hace nada y la app sigue igual
         }
     }
 }
