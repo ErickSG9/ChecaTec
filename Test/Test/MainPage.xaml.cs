@@ -28,7 +28,10 @@ namespace Test
         {
             await Navigation.PushAsync(new EstadisticasPage());
         }
-
+        private async void OnHistorialClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HistorialPage());
+        }
         private async void OnRecetaClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RecetaPage());
