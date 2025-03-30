@@ -14,10 +14,10 @@
                    Margin="0,30,0,20"/>
 
             <!-- Usuario / Correo -->
-            <Label Text="Usuario o Correo"
+            <Label Text="Correo"
                    TextColor="Black"/>
             <Entry x:Name="entryUsuario"
-                   Placeholder="Usuario o Correo"
+                   Placeholder="Email"
                    Keyboard="Email"
                    TextColor="Black"
                    BackgroundColor="#f0f0f0"/>

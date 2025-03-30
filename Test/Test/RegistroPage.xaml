@@ -4,14 +4,24 @@
              x:Class="Test.RegistroPage"
              Title="Registro"
              BackgroundColor="White">
-
-    <StackLayout Padding="20" Spacing="10">
+    <Grid>
+        <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
 
         <Label Text="Nombre" TextColor="Black"/>
         <Entry x:Name="entryNombre" Placeholder="Ingrese su nombre" TextColor="Black" BackgroundColor="#f0f0f0"/>
+       
+        <Label Text="Apellidos" TextColor="Black"/>
+        <Entry x:Name="entryApellidos" Placeholder="Ingrese sus apellidos" TextColor="Black" BackgroundColor="#f0f0f0"/>
+        
+        <Label Text="Edad" TextColor="Black"/>
+        <Entry x:Name="entryEdad" Placeholder="Ingrese su edad" TextColor="Black" BackgroundColor="#f0f0f0"/>
+        
+        <Label Text="Teléfono" TextColor="Black"/>
+        <Entry x:Name="entryTelefono" Placeholder="**********" TextColor="Black" BackgroundColor="#f0f0f0"/>
 
         <Label Text="Correo Electrónico" TextColor="Black"/>
-        <Entry x:Name="entryEmail" Placeholder="Ej. correo@ejemplo.com" Keyboard="Email" TextColor="Black" BackgroundColor="#f0f0f0"/>
+        <Entry x:Name="entryEmail" Placeholder="correo@ejemplo.com" Keyboard="Email" TextColor="Black" BackgroundColor="#f0f0f0"/>
 
         <Label Text="Contraseña" TextColor="Black"/>
         <Entry x:Name="entryContrasena" Placeholder="Contraseña" IsPassword="True" TextColor="Black" BackgroundColor="#f0f0f0"/>
@@ -20,18 +30,33 @@
             BackgroundColor="Transparent"
             Clicked="VerContrasena_Clicked"/>
         <Label Text="Rol" TextColor="Black"/>
-        <Picker x:Name="pickerRol">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Médico</x:String>
-                    <x:String>Paciente</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            <Picker x:Name="pickerRol" SelectedIndexChanged="pickerRol_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Médico</x:String>
+                        <x:String>Paciente</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
 
-        <Button Text="Registrar"
+            <StackLayout x:Name="emergenciaLayout" IsVisible="False">
+
+            <Label Text="Datos de emergencia" TextColor="Black"/>
+
+            <Label Text="Nombre" TextColor="Black"/>
+            <Entry x:Name="entryNomE" Placeholder="Ingrese su nombre" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+            <Label Text="Parentesco" TextColor="Black"/>
+            <Entry x:Name="entryParE" Placeholder="Ingrese su parentesco" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+            <Label Text="Teléfono" TextColor="Black"/>
+            <Entry x:Name="entryTelE" Placeholder="**********" TextColor="Black" BackgroundColor="#f0f0f0"/>
+            </StackLayout>
+            <Button Text="Registrar"
                 BackgroundColor="#007AFF"
                 TextColor="White"
                 Clicked="RegistrarUsuario_Clicked"/>
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
+        </Grid>
 </ContentPage>
