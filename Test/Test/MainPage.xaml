@@ -3,6 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.MainPage"
              BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="logout.png"
+                 Text="Cerrar sesión"
+                 Order="Primary"
+                 Priority="0"
+                 Clicked="CerrarSesion_Clicked"/>
+    </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="Auto,*,Auto">
 

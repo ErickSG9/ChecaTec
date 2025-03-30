@@ -33,5 +33,9 @@ namespace Test.Views
         {
             await DisplayAlert("Registro", "Redirigiendo al registro...", "OK");
         }
+        private void MostrarOcultarContrasena_Clicked(object sender, EventArgs e)
+        {
+            entryContrasena.IsPassword = !entryContrasena.IsPassword;
+        }
     }
 }

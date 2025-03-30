@@ -13,7 +13,7 @@ namespace Test
         {
             if (_database == null)
             {
-                var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Test.sql");
+                var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Test.db3");
                 _database = new SQLiteConnection(dbPath);
             }
             return _database;

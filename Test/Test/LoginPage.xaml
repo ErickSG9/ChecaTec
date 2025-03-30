@@ -26,10 +26,17 @@
             <Label Text="Contraseña"
                    TextColor="Black"/>
             <Entry x:Name="entryContrasena"
-                   Placeholder="Contraseña"
-                   IsPassword="True"
-                   TextColor="Black"
-                   BackgroundColor="#f0f0f0"/>
+           Placeholder="Contraseña"
+           IsPassword="True"
+           TextColor="Black"
+           BackgroundColor="#f0f0f0"
+           WidthRequest="250"/>
+            <!-- Ajusta el tamaño para que el botón encaje -->
+
+            <Button x:Name="btnMostrarContrasena"
+            Text="👁️"
+            BackgroundColor="Transparent"
+            Clicked="MostrarOcultarContrasena_Clicked"/>
 
             <!-- Botón Iniciar Sesión -->
             <Button Text="Iniciar Sesión"

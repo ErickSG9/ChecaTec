@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.RegistroPage"
+             Title="Registro"
+             BackgroundColor="White">
+
+    <StackLayout Padding="20" Spacing="10">
+
+        <Label Text="Nombre" TextColor="Black"/>
+        <Entry x:Name="entryNombre" Placeholder="Ingrese su nombre" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+        <Label Text="Correo Electrónico" TextColor="Black"/>
+        <Entry x:Name="entryEmail" Placeholder="Ej. correo@ejemplo.com" Keyboard="Email" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+        <Label Text="Contraseña" TextColor="Black"/>
+        <Entry x:Name="entryContrasena" Placeholder="Contraseña" IsPassword="True" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+        <Label Text="Rol" TextColor="Black"/>
+        <Picker x:Name="pickerRol">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Médico</x:String>
+                    <x:String>Paciente</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Registrar"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                Clicked="RegistrarUsuario_Clicked"/>
+    </StackLayout>
+</ContentPage>

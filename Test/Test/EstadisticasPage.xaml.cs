@@ -12,7 +12,7 @@ namespace Test
     {
         public EstadisticasPage()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
     }
 }
