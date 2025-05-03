@@ -1,51 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using Test.Data;
+using Test.Models;
 
 namespace Test
 {
     public partial class MensajesPage : ContentPage
     {
+        private int IdEmisor;
+        private int IdReceptor;
         public MensajesPage()
         {
             InitializeComponent();
-            CargarMensajes();
+            CargarConversaciones();
         }
 
-        // Modelo de mensaje
-        public class Mensaje
+        private void CargarConversaciones()
         {
-            public string Foto { get; set; }
-            public string Nombre { get; set; }
-            public string UltimoMensaje { get; set; }
-            public string Hora { get; set; }
-        }
+            var usuario = App.UsuarioActual;
+            if (usuario == null)
+                return;
 
-        // Lista de ejemplo
-        private void CargarMensajes()
-        {
-            var lista = new List<Mensaje>
+            var chats = Database.GetChatsPorUsuario(usuario.IdUsuario);
+            var usuariosConConversacion = chats
+                .Select(c => c.IdEmisor == usuario.IdUsuario ? c.IdReceptor : c.IdEmisor)
+                .Distinct()
+                .ToList();
+
+            var listaResumen = new List<ChatResumen>();
+
+            foreach (var id in usuariosConConversacion)
             {
-                new Mensaje { Foto = "doctor1.png", Nombre = "Dr. Ramírez", UltimoMensaje = "Nos vemos a las 10", Hora = "9:45" },
-                new Mensaje { Foto = "doctor2.png", Nombre = "Dra. López", UltimoMensaje = "Receta enviada", Hora = "Ayer" },
-                new Mensaje { Foto = "doctor3.png", Nombre = "Dr. Pérez", UltimoMensaje = "Gracias por la info", Hora = "Lun" }
-            };
+                var otroUsuario = Database.GetUsuarioPorId(id);
+                if (otroUsuario == null) continue;
 
-            MensajesList.ItemsSource = lista;
-        }
+                var ultimoMensaje = chats
+                    .Where(c => c.IdEmisor == otroUsuario.IdUsuario || c.IdReceptor == otroUsuario.IdUsuario)
+                    .OrderByDescending(c => c.FechaEnvio)
+                    .FirstOrDefault();
 
-        // Navegación al chat
-        private async void MensajesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.CurrentSelection.FirstOrDefault() is Mensaje seleccionado)
-            {
-                await Navigation.PushAsync(new ChatPage(seleccionado.Nombre));
-                MensajesList.SelectedItem = null; // Deselecciona después de abrir
+                listaResumen.Add(new ChatResumen
+                {
+                    IdEmisor = usuario.IdUsuario,
+                    IdReceptor = otroUsuario.IdUsuario,
+                    Nombre = otroUsuario.Nombre,
+                    UltimoMensaje = ultimoMensaje?.Mensaje ?? "",
+                    Hora = ultimoMensaje?.FechaEnvio.ToString("HH:mm"),
+                    Foto = "perfil.png"
+                });
             }
+
+
+            MensajesList.ItemsSource = listaResumen;
         }
+        private async void IrASeleccionarPaciente_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SeleccionarPacientePage());
+        }
+        private void MensajesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.Count == 0)
+                return;
+
+            var chatSeleccionado = e.CurrentSelection[0] as ChatResumen;
+
+            if (chatSeleccionado == null)
+                return;
+
+            Navigation.PushAsync(new ChatPage(chatSeleccionado.IdEmisor, chatSeleccionado.IdReceptor));
+
+            ((CollectionView)sender).SelectedItem = null;
+        }
+
+
+
     }
 }

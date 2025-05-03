@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Test.Models;
 
@@ -61,6 +62,77 @@ namespace Test.Data
         {
             var db = GetConnection();
             return db.Table<Usuario>().FirstOrDefault(u => u.Email == email && u.Contrasena == contrasena);
+        }
+        public static void EnviarMensaje(int idEmisor, int idReceptor, string mensaje)
+        {
+            var db = GetConnection();
+
+            var nuevoMensaje = new Chat
+            {
+                IdEmisor = idEmisor,
+                IdReceptor = idReceptor,
+                Mensaje = mensaje,
+                FechaEnvio = DateTime.Now,
+                Leido = false
+            };
+
+            db.Insert(nuevoMensaje);
+        }
+
+        // Obtener mensajes entre dos usuarios
+        public static List<Chat> ObtenerConversacion(int idUsuario1, int idUsuario2)
+        {
+            var db = GetConnection();
+
+            return db.Table<Chat>()
+                .Where(c =>
+                    (c.IdEmisor == idUsuario1 && c.IdReceptor == idUsuario2) ||
+                    (c.IdEmisor == idUsuario2 && c.IdReceptor == idUsuario1))
+                .OrderBy(c => c.FechaEnvio)
+                .ToList();
+        }
+        public static void InsertarMensajePrueba(int idEmisor, int idReceptor, string texto)
+        {
+            var db = GetConnection();
+
+            var mensaje = new Chat
+            {
+                IdEmisor = idEmisor,
+                IdReceptor = idReceptor,
+                Mensaje = texto,
+                FechaEnvio = DateTime.Now,
+                Leido = false
+            };
+
+            db.Insert(mensaje);
+        }
+        public static List<Usuario> GetUsuariosPorRol(string rol)
+        {
+            var db = GetConnection();
+            return db.Table<Usuario>().Where(u => u.Rol == rol).ToList();
+        }
+        public static List<Chat> GetChatsPorUsuario(int usuarioId)
+        {
+            var db = GetConnection();
+            return db.Table<Chat>().Where(c => c.IdEmisor == usuarioId || c.IdReceptor == usuarioId).ToList();
+        }
+        public static void GuardarMensaje(int idEmisor, int idReceptor, string mensaje, bool leido)
+        {
+            var db = GetConnection();
+            var nuevoMensaje = new Chat
+            {
+                IdEmisor = idEmisor,
+                IdReceptor = idReceptor,
+                Mensaje = mensaje,
+                FechaEnvio = DateTime.Now,
+                Leido = leido
+            };
+            db.Insert(nuevoMensaje);
+        }
+        public static Usuario GetUsuarioPorId(int id)
+        {
+            var db = GetConnection();
+            return db.Table<Usuario>().FirstOrDefault(u => u.IdUsuario == id);
         }
     }
 }

@@ -41,6 +41,10 @@ namespace Test
         {
             await Navigation.PushAsync(new PersonalPage());
         }
+        private async void OnUsersClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UsuariosPage());
+        }
         private async void CerrarSesion_Clicked(object sender, EventArgs e)
         {
             bool respuesta = await DisplayAlert("Cerrar sesión", "¿Está seguro de que desea cerrar sesión?", "Sí", "Cancelar");

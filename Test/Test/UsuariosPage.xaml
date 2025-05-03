@@ -19,6 +19,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10" BackgroundColor="#f2f2f2" Margin="0,5">
+                            <Label Text="{Binding IdUsuario}"/>
                             <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
                             <Label Text="{Binding Apellidos}"/>
                             <Label Text="{Binding Edad}"/>
