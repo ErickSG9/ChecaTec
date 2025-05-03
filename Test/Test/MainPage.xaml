@@ -35,11 +35,11 @@
             <!-- Botones -->
             <StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
                 <Button Text="MENSAJES" Clicked="OnMensajesClicked" Style="{StaticResource MenuButtonStyle}" />
-                <Button Text="ESTADÍSTICAS" Clicked="OnEstadisticasClicked" Style="{StaticResource MenuButtonStyle}" />
-                <Button Text="HISTORIAL" Clicked="OnHistorialClicked" Style="{StaticResource MenuButtonStyle}" />
+                <Button Text="EXPEDIENTE CLINICO" Clicked="OnExpedienteClicked" Style="{StaticResource MenuButtonStyle}" />                
                 <Button Text="RECETA MÉDICA" Clicked="OnRecetaClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="PERSONAL MÉDICO" Clicked="OnPersonalClicked" Style="{StaticResource MenuButtonStyle}" />
-                <Button Text="DB" Clicked="OnDBClicked" Style="{StaticResource MenuButtonStyle}" />
+                <Button Text="Usuarios" Clicked="OnUsersClicked" Style="{StaticResource MenuButtonStyle}" />
+                <!--<Button Text="DB" Clicked="OnDBClicked" Style="{StaticResource MenuButtonStyle}" /> -->
             </StackLayout>
         </Grid>
 

@@ -1,51 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
+using Test.Models;
+using Test.Data;
 
 namespace Test
 {
-        public partial class ChatPage : ContentPage
+    public partial class ChatPage : ContentPage
+    {
+        private Usuario emisor;
+        private Usuario receptor; 
+        private int IdEmisor;
+        private int IdReceptor;
+
+        public ObservableCollection<Chat> Mensajes { get; set; }
+        public ChatPage(int idEmisor, int idReceptor)
         {
-            public ChatPage(string nombre)
-            {
-                InitializeComponent();
-                NombreDoctor.Text = nombre;
-                CargarMensajesPrueba();
-            }
+            InitializeComponent();
+            IdEmisor = idEmisor;
+            IdReceptor = idReceptor;
 
-            void CargarMensajesPrueba()
-            {
-                AgregarMensaje("Hola, ¿cómo te sientes hoy?", false);
-                AgregarMensaje("Mejor, gracias doctor.", true);
-            }
+            emisor = Database.GetUsuarioPorId(IdEmisor);
+            receptor = Database.GetUsuarioPorId(IdReceptor);
 
-            void EnviarMensaje_Clicked(object sender, EventArgs e)
-            {
-                var texto = MensajeEntry.Text;
-                if (!string.IsNullOrWhiteSpace(texto))
-                {
-                    AgregarMensaje(texto, true);
-                    MensajeEntry.Text = "";
-                }
-            }
+            CargarMensajes();
+        }
+        private void CargarMensajes()
+        {
+            var mensajes = Database.ObtenerConversacion(IdEmisor, IdReceptor);
+            MensajesListView.ItemsSource = mensajes;
+        }
+        private void Enviar_Clicked(object sender, EventArgs e)
+        {
+            string texto = MensajeEntry.Text;
 
-            void AgregarMensaje(string texto, bool esUsuario)
+            if (!string.IsNullOrWhiteSpace(texto))
             {
-                var mensajeLabel = new Label
-                {
-                    Text = texto,
-                    BackgroundColor = esUsuario ? Color.LightGreen : Color.LightGray,
-                    Padding = 10,
-                    Margin = new Thickness(5),
-                    HorizontalOptions = esUsuario ? LayoutOptions.End : LayoutOptions.Start,
-                    TextColor = Color.Black
-                };
-
-                MensajesStack.Children.Add(mensajeLabel);
+                Database.GuardarMensaje(App.UsuarioActual.IdUsuario, receptor.IdUsuario, texto, false);
+                MensajeEntry.Text = "";
+                CargarMensajes();
             }
         }
+    }
 }

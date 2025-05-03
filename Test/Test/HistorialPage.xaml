@@ -2,76 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.HistorialPage"
-             Title="Historial"
+             Title="Historial de Operaciones"
              BackgroundColor="White">
 
     <ScrollView>
         <StackLayout Padding="10" Spacing="20">
 
-            <!-- Tarjeta de reporte -->
+            <!-- Operación 1 -->
             <Frame CornerRadius="15" BorderColor="Black" Padding="15">
                 <StackLayout Spacing="10">
-                    <Label Text="Reporte 15/03/2025" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
-                    <Label Text="BIOMETRIA HEMATICA COMPLETA" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="Operación - 12/03/2024" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+                    <Label Text="Tipo: Apendicectomía"/>
+                    <Label Text="Paciente: Ana Rodríguez"/>
+                    <Label Text="Cirujano: Dr. Luis Ramírez"/>
+                    <Label Text="Hora: 08:15 AM"/>
+                    <Label Text="Quirófano: Sala 2"/>
+                    <Label Text="Estado: Finalizada"/>
 
-                    <Grid ColumnDefinitions="Auto,Auto"
-                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                        RowSpacing="5">
+                    <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
+                    <Label Text="Paciente respondió favorablemente. Sin complicaciones." 
+                           FontAttributes="Italic"
+                           TextColor="Gray"/>
+                </StackLayout>
+            </Frame>
 
-                        <Label Text="GLOBULOS ROJOS" Grid.Row="0" Grid.Column="0"/>
-                        <Label Text="5.47" Grid.Row="0" Grid.Column="1"/>
+            <!-- Operación 2 -->
+            <Frame CornerRadius="15" BorderColor="Black" Padding="15">
+                <StackLayout Spacing="10">
+                    <Label Text="Operación - 25/11/2023" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+                    <Label Text="Tipo: Cirugía de vesícula"/>
+                    <Label Text="Paciente: Ana Rodríguez"/>
+                    <Label Text="Cirujano: Dra. María Torres"/>
+                    <Label Text="Hora: 03:00 PM"/>
+                    <Label Text="Quirófano: Sala 1"/>
+                    <Label Text="Estado: Finalizada"/>
 
-                        <Label Text="HEMATOCRITO" Grid.Row="1" Grid.Column="0"/>
-                        <Label Text="46.5" Grid.Row="1" Grid.Column="1"/>
-
-                        <Label Text="HEMOGLOBINA" Grid.Row="2" Grid.Column="0"/>
-                        <Label Text="15.5" Grid.Row="2" Grid.Column="1"/>
-
-                        <Label Text="V.C.M." Grid.Row="3" Grid.Column="0"/>
-                        <Label Text="84.9" Grid.Row="3" Grid.Column="1"/>
-
-                        <Label Text="V.H.M.B" Grid.Row="4" Grid.Column="0"/>
-                        <Label Text="33.3" Grid.Row="4" Grid.Column="1"/>
-
-                        <Label Text="H.C.M" Grid.Row="5" Grid.Column="0"/>
-                        <Label Text="28.3" Grid.Row="5" Grid.Column="1"/>
-
-                        <Label Text="LEUCOCITOS" Grid.Row="6" Grid.Column="0"/>
-                        <Label Text="6400" Grid.Row="6" Grid.Column="1"/>
-
-                        <Label Text="LINFOCITOS" Grid.Row="7" Grid.Column="0"/>
-                        <Label Text="31" Grid.Row="7" Grid.Column="1"/>
-
-                        <Label Text="MONOCITOS" Grid.Row="8" Grid.Column="0"/>
-                        <Label Text="3" Grid.Row="8" Grid.Column="1"/>
-
-                        <Label Text="EOSINOFILOS" Grid.Row="9" Grid.Column="0"/>
-                        <Label Text="2" Grid.Row="9" Grid.Column="1"/>
-
-                        <Label Text="SEGMENTADOS" Grid.Row="10" Grid.Column="0"/>
-                        <Label Text="64" Grid.Row="10" Grid.Column="1"/>
-
-                        <Label Text="BANDA" Grid.Row="11" Grid.Column="0"/>
-                        <Label Text="0" Grid.Row="11" Grid.Column="1"/>
-
-                        <Label Text="NEUTROFILOS" Grid.Row="12" Grid.Column="0"/>
-                        <Label Text="64" Grid.Row="12" Grid.Column="1"/>
-
-                        <Label Text="PLAQUETAS" Grid.Row="13" Grid.Column="0"/>
-                        <Label Text="215000" Grid.Row="13" Grid.Column="1"/>
-
-                        <Label Text="GLUCOSA" Grid.Row="14" Grid.Column="0"/>
-                        <Label Text="90.0" Grid.Row="14" Grid.Column="1"/>
-
-                        <Label Text="COLESTEROL TOTAL" Grid.Row="15" Grid.Column="0"/>
-                        <Label Text="199.0" Grid.Row="15" Grid.Column="1"/>
-
-                        <Label Text="TIPO SANGUINEO" Grid.Row="16" Grid.Column="0"/>
-                        <Label Text="O" Grid.Row="16" Grid.Column="1"/>
-
-                        <Label Text="FACTOR RH" Grid.Row="17" Grid.Column="0"/>
-                        <Label Text="POSITIVO" Grid.Row="17" Grid.Column="1"/>
-                    </Grid>
+                    <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
+                    <Label Text="Hubo leve sangrado, controlado exitosamente. Recuperación rápida." 
+                           FontAttributes="Italic"
+                           TextColor="Gray"/>
                 </StackLayout>
             </Frame>
 

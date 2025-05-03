@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using System;
+using SQLite;
 
 namespace Test.Models
 {
@@ -11,7 +12,7 @@ namespace Test.Models
         public int IdEmisor { get; set; } // Usuario que envía el mensaje
         public int IdReceptor { get; set; } // Usuario que recibe el mensaje
         public string Mensaje { get; set; }
-        public string FechaEnvio { get; set; }
+        public DateTime FechaEnvio { get; set; }
         public bool Leido { get; set; } // 0: No leído, 1: Leído
 
         // Claves foráneas para acceder a los usuarios si es necesario

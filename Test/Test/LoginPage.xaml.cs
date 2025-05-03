@@ -27,6 +27,7 @@ namespace Test.Views
 
             if (usuario != null)
             {
+                App.UsuarioActual = usuario;
                 await DisplayAlert("Bienvenido", $"Acceso correcto, {usuario.Nombre}", "Continuar");
 
                 // Si es médico, ir a MainPage con acceso médico

@@ -23,14 +23,9 @@ namespace Test
         {
             await Navigation.PushAsync(new UsuariosPage());
         }
-
-        private async void OnEstadisticasClicked(object sender, EventArgs e)
+        private async void OnExpedienteClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EstadisticasPage());
-        }
-        private async void OnHistorialClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new HistorialPage());
+            await Navigation.PushAsync(new ExpedientePage());
         }
         private async void OnRecetaClicked(object sender, EventArgs e)
         {
@@ -40,6 +35,10 @@ namespace Test
         private async void OnPersonalClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new PersonalPage());
+        }
+        private async void OnUsersClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new UsuariosPage());
         }
         private async void CerrarSesion_Clicked(object sender, EventArgs e)
         {

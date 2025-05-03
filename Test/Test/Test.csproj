@@ -24,6 +24,9 @@
     <Compile Update="EstadisticasPage.xaml.cs">
       <DependentUpon>EstadisticasPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="SeleccionarPacientePage.xaml.cs">
+      <DependentUpon>SeleccionarPacientePage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="UsuariosPage.xaml.cs">
       <DependentUpon>UsuariosPage.xaml</DependentUpon>
     </Compile>
@@ -42,7 +45,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Estadisticas.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Expediente.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="HistorialPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Page1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
