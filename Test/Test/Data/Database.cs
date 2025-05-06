@@ -11,12 +11,13 @@ namespace Test.Data
         public static void InitializeDatabase()
         {
             var db = GetConnection();
-
+            db.Execute("DROP TABLE IF EXISTS Operacion;");
             db.CreateTable<Usuario>();
             db.CreateTable<Paciente>();
             db.CreateTable<Receta>();
             db.CreateTable<HistorialClinico>();
-            db.CreateTable<Chat>();
+            db.CreateTable<Chat>(); 
+            db.CreateTable<Operacion>();
         }
         private static SQLiteConnection _database;
 
@@ -143,6 +144,17 @@ namespace Test.Data
         {
             var db = GetConnection();
             return db.Table<Usuario>().FirstOrDefault(u => u.IdUsuario == id);
+        }
+        public static List<Operacion> ObtenerOperacionesPorPaciente(int idPaciente)
+        {
+            var db = GetConnection();
+            return db.Table<Operacion>().Where(o => o.IdUsuario == idPaciente).ToList();
+        }
+        public static void InsertarOperacion(Operacion operacion)
+        {
+            var db = GetConnection();
+            db.CreateTable<Operacion>(); // Asegura que la tabla exista
+            db.Insert(operacion);
         }
     }
 }

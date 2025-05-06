@@ -24,6 +24,9 @@
     <Compile Update="EstadisticasPage.xaml.cs">
       <DependentUpon>EstadisticasPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="AgregarOperacionPage.xaml.cs">
+      <DependentUpon>AgregarOperacionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="MainPageP.xaml.cs">
       <DependentUpon>MainPageP.xaml</DependentUpon>
     </Compile>

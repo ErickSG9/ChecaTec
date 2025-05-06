@@ -4,12 +4,14 @@
              x:Class="Test.HistorialPage"
              Title="Historial de Operaciones"
              BackgroundColor="White">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Inicio"
                      Priority="0"
                      Order="Primary"
                      Clicked="OnMainClicked" />
     </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto, Auto, *">
 
         <!-- Botones HISTORIAL y ESTADISTICAS -->
@@ -37,47 +39,33 @@
                     BorderWidth="1" />
         </Grid>
 
-        <!-- Contenido de operaciones -->
-        <ScrollView Grid.Row="2">
-            <StackLayout Padding="10" Spacing="20">
+        <!-- Lista de operaciones dinámicas -->
+        <CollectionView x:Name="ListaOperaciones" Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
+                        <StackLayout Spacing="10">
+                            <Label Text="{Binding Fecha, StringFormat='Operación - {0:dd/MM/yyyy}'}"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="{Binding Tipo, StringFormat='Tipo: {0}'}"/>
+                            <Label Text="{Binding Cirujano, StringFormat='Cirujano: {0}'}"/>
+                            <Label Text="{Binding Hora, StringFormat='Hora: {0}'}"/>
+                            <Label Text="{Binding Quirofano, StringFormat='Quirófano: {0}'}"/>
+                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}"/>
 
-                <!-- Operación 1 -->
-                <Frame CornerRadius="15" BorderColor="Black" Padding="15">
-                    <StackLayout Spacing="10">
-                        <Label Text="Operación - 12/03/2024" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
-                        <Label Text="Tipo: Apendicectomía"/>
-                        <Label Text="Paciente: Ana Rodríguez"/>
-                        <Label Text="Cirujano: Dr. Luis Ramírez"/>
-                        <Label Text="Hora: 08:15 AM"/>
-                        <Label Text="Quirófano: Sala 2"/>
-                        <Label Text="Estado: Finalizada"/>
-
-                        <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
-                        <Label Text="Paciente respondió favorablemente. Sin complicaciones." 
-                               FontAttributes="Italic"
-                               TextColor="Gray"/>
-                    </StackLayout>
-                </Frame>
-
-                <!-- Operación 2 -->
-                <Frame CornerRadius="15" BorderColor="Black" Padding="15">
-                    <StackLayout Spacing="10">
-                        <Label Text="Operación - 25/11/2023" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
-                        <Label Text="Tipo: Cirugía de vesícula"/>
-                        <Label Text="Paciente: Ana Rodríguez"/>
-                        <Label Text="Cirujano: Dra. María Torres"/>
-                        <Label Text="Hora: 03:00 PM"/>
-                        <Label Text="Quirófano: Sala 1"/>
-                        <Label Text="Estado: Finalizada"/>
-
-                        <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
-                        <Label Text="Hubo leve sangrado, controlado exitosamente. Recuperación rápida." 
-                               FontAttributes="Italic"
-                               TextColor="Gray"/>
-                    </StackLayout>
-                </Frame>
-
-            </StackLayout>
-        </ScrollView>
+                            <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
+                            <Label Text="{Binding Observaciones}" FontAttributes="Italic" TextColor="Gray"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Nuevo"
+        BackgroundColor="#007AFF"
+        TextColor="White"
+        CornerRadius="10"
+        Clicked="OnNuevoClicked"/>
     </Grid>
 </ContentPage>

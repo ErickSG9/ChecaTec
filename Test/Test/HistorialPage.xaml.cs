@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test.Data;
 using Xamarin.Forms;
 
 namespace Test
@@ -21,6 +22,17 @@ namespace Test
         private async void OnMainClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MainPageP());
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var operaciones = Database.ObtenerOperacionesPorPaciente(App.UsuarioActual.IdUsuario);
+            ListaOperaciones.ItemsSource = operaciones;
+        }
+        private async void OnNuevoClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AgregarOperacionPage());
         }
     }
 }

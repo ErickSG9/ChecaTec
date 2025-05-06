@@ -4,7 +4,7 @@ CREATE TABLE Usuarios (
     Nombre TEXT NOT NULL,
     Email TEXT UNIQUE NOT NULL,
     Contrasena TEXT NOT NULL,
-    Rol TEXT NOT NULL, -- Ej: "Paciente" o "Médico"
+    Rol TEXT NOT NULL, -- Ej: "Paciente" o "MÃ©dico"
     FechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE Pacientes (
 CREATE TABLE Recetas (
     IdReceta INTEGER PRIMARY KEY AUTOINCREMENT,
     IdPaciente INTEGER NOT NULL,
-    IdProfesional INTEGER NOT NULL, -- Hace referencia a un usuario con rol "Médico"
+    IdProfesional INTEGER NOT NULL, -- Hace referencia a un usuario con rol "MÃ©dico"
     FechaEmision DATETIME DEFAULT CURRENT_TIMESTAMP,
     Medicamento TEXT NOT NULL,
     Dosis TEXT NOT NULL,
@@ -32,11 +32,11 @@ CREATE TABLE Recetas (
     FOREIGN KEY (IdProfesional) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
 );
 
--- Tabla de Historial Clínico
+-- Tabla de Historial ClÃ­nico
 CREATE TABLE HistorialClinico (
     IdHistorial INTEGER PRIMARY KEY AUTOINCREMENT,
     IdPaciente INTEGER NOT NULL,
-    IdProfesional INTEGER NOT NULL, -- Hace referencia a un usuario con rol "Médico"
+    IdProfesional INTEGER NOT NULL, -- Hace referencia a un usuario con rol "MÃ©dico"
     FechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
     Notas TEXT,
     Diagnostico TEXT,
@@ -47,11 +47,24 @@ CREATE TABLE HistorialClinico (
 -- Tabla de Chat
 CREATE TABLE Chat (
     IdMensaje INTEGER PRIMARY KEY AUTOINCREMENT,
-    IdEmisor INTEGER NOT NULL, -- Usuario que envía el mensaje
+    IdEmisor INTEGER NOT NULL, -- Usuario que envÃ­a el mensaje
     IdReceptor INTEGER NOT NULL, -- Usuario que recibe el mensaje
     Mensaje TEXT NOT NULL,
     FechaEnvio DATETIME DEFAULT CURRENT_TIMESTAMP,
-    Leido BOOLEAN DEFAULT 0, -- 0: No leído, 1: Leído
+    Leido BOOLEAN DEFAULT 0, -- 0: No leÃ­do, 1: LeÃ­do
     FOREIGN KEY (IdEmisor) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE,
     FOREIGN KEY (IdReceptor) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
+);
+-- Tabla de Operaciones 
+CREATE TABLE Operacion (
+    IdOperacion INTEGER PRIMARY KEY AUTOINCREMENT,
+    IdUsuario INTEGER NOT NULL,
+    Fecha TEXT NOT NULL,
+    Tipo TEXT NOT NULL,
+    Cirujano TEXT NOT NULL,
+    Hora TEXT NOT NULL,
+    Quirofano TEXT NOT NULL,
+    Estado TEXT NOT NULL,
+    Observaciones TEXT,
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
 );
