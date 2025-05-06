@@ -33,7 +33,7 @@ namespace Test.Views
                 // Si es médico, ir a MainPage con acceso médico
                 if (usuario.Rol == "Médico")
                 {
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MensajesPage());
                 }
                 // Si es paciente, ir a MainPage con acceso paciente
                 else if (usuario.Rol == "Paciente")

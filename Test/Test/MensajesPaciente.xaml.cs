@@ -8,24 +8,16 @@ using Test.Models;
 
 namespace Test
 {
-    public partial class MensajesPage : ContentPage
+    public partial class MensajesPaciente : ContentPage
     {
         private List<ChatResumen> chatsOriginales;
 
-        public MensajesPage()
+        public MensajesPaciente()
         {
             InitializeComponent();
             CargarConversaciones();
         }
-        private async void CerrarSesion_Clicked(object sender, EventArgs e)
-        {
-            bool respuesta = await DisplayAlert("Cerrar sesión", "¿Está seguro de que desea cerrar sesión?", "Sí", "Cancelar");
 
-            if (respuesta) 
-            {
-                Application.Current.MainPage = new NavigationPage(new LoginPage()); 
-            }
-        }
         private void CargarConversaciones()
         {
             var usuario = App.UsuarioActual;
@@ -77,9 +69,9 @@ namespace Test
 
             // Buscar coincidencias flexibles
             var coincidencias = chatsOriginales.Where(c =>
-               // c.Nombre.ToLower().Contains(filtro) ||           // Contiene en cualquier parte
-                c.Nombre.ToLower().StartsWith(filtro)// ||         // Empieza con...
-               // (c.Nombre.ToLower().Split(' ').Any(p => p.StartsWith(filtro))) // Por partes del nombre
+                c.Nombre.ToLower().Contains(filtro) ||           // Contiene en cualquier parte
+                c.Nombre.ToLower().StartsWith(filtro) ||         // Empieza con...
+                (c.Nombre.ToLower().Split(' ').Any(p => p.StartsWith(filtro))) // Por partes del nombre
             ).ToList();
 
             MensajesList.ItemsSource = coincidencias;
@@ -96,10 +88,6 @@ namespace Test
             ).ToList();
 
             MensajesList.ItemsSource = coincidencias;
-        }
-        private async void IrASeleccionarPaciente_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SeleccionarPacientePage());
         }
 
         private void MensajesList_SelectionChanged(object sender, SelectionChangedEventArgs e)

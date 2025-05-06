@@ -15,7 +15,7 @@
     <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- ENCABEZADO AZUL -->
-        <Grid BackgroundColor="#007AFF" Padding="15" HeightRequest="80">
+        <Grid BackgroundColor="#2296f3" Padding="15" HeightRequest="80">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

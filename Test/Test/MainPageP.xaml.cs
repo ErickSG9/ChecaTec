@@ -17,7 +17,7 @@ namespace Test
         }
         private async void OnMensajesClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MensajesPage());
+            await Navigation.PushAsync(new MensajesPaciente());
         }
         private async void OnDBClicked(object sender, EventArgs e)
         {

@@ -20,7 +20,7 @@ namespace Test
         }
         private async void OnMainClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new MainPageP());
         }
     }
 }

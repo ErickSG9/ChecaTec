@@ -1,23 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Test.MensajesPage"
-             Title="Pacientes"
+             x:Class="Test.MensajesPaciente"
+             Title="Mensajes"
              BackgroundColor="White">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="logout.png"
-         Text="Cerrar sesión"
-         Order="Primary"
-         Priority="0"
-         Clicked="CerrarSesion_Clicked"/>
-        
-    </ContentPage.ToolbarItems>
-
     <StackLayout Padding="20" Spacing="10">
+
+
         <!-- Barra de búsqueda -->
         <SearchBar x:Name="BusquedaBar"
-           Placeholder="Buscar paciente..."
+           Placeholder="Buscar doctor..."
            TextChanged="OnSearchTextChanged"
            SearchButtonPressed="OnSearchButtonPressed" />
 
@@ -42,7 +35,7 @@
                             <!-- Hora + Botón perfil -->
                             <StackLayout Grid.Column="2" Spacing="5" VerticalOptions="Start">
                                 <Label Text="{Binding Hora}" FontSize="12" TextColor="Gray"/>
-                                <Button Text="Expediente"
+                                <Button Text="Perfil"
                                         FontSize="10"
                                         Padding="0"
                                         Clicked="VerPerfil_Clicked"
@@ -53,10 +46,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="Nuevo"
-        BackgroundColor="#007AFF"
-        TextColor="White"
-        CornerRadius="10"
-        Clicked="IrASeleccionarPaciente_Clicked"/>
     </StackLayout>
 </ContentPage>

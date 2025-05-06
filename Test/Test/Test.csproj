@@ -27,6 +27,9 @@
     <Compile Update="MainPageP.xaml.cs">
       <DependentUpon>MainPageP.xaml</DependentUpon>
     </Compile>
+    <Compile Update="MensajesPaciente.xaml.cs">
+      <DependentUpon>MensajesPaciente.xaml</DependentUpon>
+    </Compile>
     <Compile Update="SeleccionarPacientePage.xaml.cs">
       <DependentUpon>SeleccionarPacientePage.xaml</DependentUpon>
     </Compile>
