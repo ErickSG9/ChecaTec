@@ -9,9 +9,9 @@ using Xamarin.Forms;
 
 namespace Test
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPageP : ContentPage
     {
-        public MainPage()
+        public MainPageP()
         {
             InitializeComponent();
         }
@@ -23,11 +23,18 @@ namespace Test
         {
             await Navigation.PushAsync(new UsuariosPage());
         }
-      
-
-        private async void OnUsersClicked(object sender, EventArgs e)
+        private async void OnHistorialClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new UsuariosPage());
+            await Navigation.PushAsync(new HistorialPage());
+        }
+        private async void OnRecetaClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RecetaPage());
+        }
+
+        private async void OnPersonalClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PersonalPage());
         }
         private async void CerrarSesion_Clicked(object sender, EventArgs e)
         {

@@ -13,7 +13,11 @@ namespace Test
         {
             InitializeComponent();
         }
-
+        public UsuariosPage(object parametro) 
+        {
+            InitializeComponent();
+            
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();

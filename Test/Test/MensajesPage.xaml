@@ -12,26 +12,45 @@
                      Clicked="IrASeleccionarPaciente_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <StackLayout Padding="20" Spacing="15">
+    <StackLayout Padding="20" Spacing="10">
         <Label Text="Conversaciones"
                FontSize="24"
                FontAttributes="Bold"
                TextColor="Black" />
-        
-        <CollectionView x:Name="MensajesList" SelectionMode="Single"
+
+        <!-- Barra de búsqueda -->
+        <SearchBar x:Name="BusquedaBar"
+           Placeholder="Buscar paciente..."
+           TextChanged="OnSearchTextChanged"
+           SearchButtonPressed="OnSearchButtonPressed" />
+
+
+        <!-- Lista de conversaciones -->
+        <CollectionView x:Name="MensajesList"
+                        SelectionMode="Single"
                         SelectionChanged="MensajesList_SelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="Gray" CornerRadius="8" Padding="10" Margin="5">
                         <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto">
+                            <!-- Foto -->
                             <Image Source="{Binding Foto}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill" />
 
+                            <!-- Info principal -->
                             <StackLayout Grid.Column="1" Spacing="2">
                                 <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="16"/>
                                 <Label Text="{Binding UltimoMensaje}" FontSize="14" TextColor="Gray"/>
                             </StackLayout>
 
-                            <Label Grid.Column="2" Text="{Binding Hora}" FontSize="12" TextColor="Gray" VerticalOptions="Start"/>
+                            <!-- Hora + Botón perfil -->
+                            <StackLayout Grid.Column="2" Spacing="5" VerticalOptions="Start">
+                                <Label Text="{Binding Hora}" FontSize="12" TextColor="Gray"/>
+                                <Button Text="Perfil"
+                                        FontSize="10"
+                                        Padding="0"
+                                        Clicked="VerPerfil_Clicked"
+                                        CommandParameter="{Binding .}" />
+                            </StackLayout>
                         </Grid>
                     </Frame>
                 </DataTemplate>

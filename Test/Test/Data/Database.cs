@@ -8,6 +8,16 @@ namespace Test.Data
 {
     public static class Database
     {
+        public static void InitializeDatabase()
+        {
+            var db = GetConnection();
+
+            db.CreateTable<Usuario>();
+            db.CreateTable<Paciente>();
+            db.CreateTable<Receta>();
+            db.CreateTable<HistorialClinico>();
+            db.CreateTable<Chat>();
+        }
         private static SQLiteConnection _database;
 
         public static SQLiteConnection GetConnection()
@@ -20,15 +30,15 @@ namespace Test.Data
             return _database;
         }
 
-        public static void InitializeDatabase()
-        {
-            var db = GetConnection();
-            db.CreateTable<Usuario>();
-            db.CreateTable<Paciente>();
-            db.CreateTable<Receta>();
-            db.CreateTable<HistorialClinico>();
-            db.CreateTable<Chat>();
-        }
+        public class Paciente
+    {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public string Sexo { get; set; }
+    }
         public static void RegistrarUsuario(string nombre, string apellidos, int edad, double telefono, string email, string contrasena, string rol, string nomE, string parE, double telE)
         {
             var db = GetConnection();

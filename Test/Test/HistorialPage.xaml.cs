@@ -14,5 +14,13 @@ namespace Test
         {
             InitializeComponent();
         }
+        private async void OnEstadisticasClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EstadisticasPage());
+        }
+        private async void OnMainClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
+        }
     }
 }

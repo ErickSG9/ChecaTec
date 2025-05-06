@@ -4,8 +4,35 @@
              x:Class="Test.EstadisticasPage"
              Title="Expediente clinico"
              BackgroundColor="White">
+    <Grid RowDefinitions="Auto, Auto, *">
 
-    <ScrollView>
+        <!-- Botones HISTORIAL y ESTADISTICAS -->
+        <Grid Grid.Row="1" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                 Text="HISTORIAL"
+                 Clicked="OnHistorialClicked"
+                 BackgroundColor="White"
+                 FontAttributes="Bold"
+                 TextColor="Black"
+                 BorderColor="Black"
+                 BorderWidth="1" />
+
+            <Button Grid.Column="1"
+                 Text="ESTADISTICAS"
+                 BackgroundColor="White"
+                 FontAttributes="Bold"
+                 TextColor="Black"
+                 BorderColor="Black"
+                 BorderWidth="1" />
+        </Grid>
+
+        <ScrollView Grid.Row="2">
+        
         <StackLayout Padding="10" Spacing="20">
 
             <!-- Tarjeta de reporte 1 -->
@@ -144,4 +171,5 @@
 
         </StackLayout>
     </ScrollView>
+    </Grid>
 </ContentPage>
