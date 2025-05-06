@@ -38,7 +38,7 @@ namespace Test.Views
                 // Si es paciente, ir a MainPage con acceso paciente
                 else if (usuario.Rol == "Paciente")
                 {
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPageP());
                 }
             }
             else

@@ -4,46 +4,80 @@
              x:Class="Test.HistorialPage"
              Title="Historial de Operaciones"
              BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Inicio"
+                     Priority="0"
+                     Order="Primary"
+                     Clicked="OnMainClicked" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto, Auto, *">
 
-    <ScrollView>
-        <StackLayout Padding="10" Spacing="20">
+        <!-- Botones HISTORIAL y ESTADISTICAS -->
+        <Grid Grid.Row="1" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <!-- Operación 1 -->
-            <Frame CornerRadius="15" BorderColor="Black" Padding="15">
-                <StackLayout Spacing="10">
-                    <Label Text="Operación - 12/03/2024" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
-                    <Label Text="Tipo: Apendicectomía"/>
-                    <Label Text="Paciente: Ana Rodríguez"/>
-                    <Label Text="Cirujano: Dr. Luis Ramírez"/>
-                    <Label Text="Hora: 08:15 AM"/>
-                    <Label Text="Quirófano: Sala 2"/>
-                    <Label Text="Estado: Finalizada"/>
+            <Button Grid.Column="0"
+                    Text="HISTORIAL"
+                    BackgroundColor="White"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    BorderWidth="1" />
 
-                    <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
-                    <Label Text="Paciente respondió favorablemente. Sin complicaciones." 
-                           FontAttributes="Italic"
-                           TextColor="Gray"/>
-                </StackLayout>
-            </Frame>
+            <Button Grid.Column="1"
+                    Text="ESTADISTICAS"
+                    Clicked="OnEstadisticasClicked"
+                    BackgroundColor="White"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    BorderWidth="1" />
+        </Grid>
 
-            <!-- Operación 2 -->
-            <Frame CornerRadius="15" BorderColor="Black" Padding="15">
-                <StackLayout Spacing="10">
-                    <Label Text="Operación - 25/11/2023" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
-                    <Label Text="Tipo: Cirugía de vesícula"/>
-                    <Label Text="Paciente: Ana Rodríguez"/>
-                    <Label Text="Cirujano: Dra. María Torres"/>
-                    <Label Text="Hora: 03:00 PM"/>
-                    <Label Text="Quirófano: Sala 1"/>
-                    <Label Text="Estado: Finalizada"/>
+        <!-- Contenido de operaciones -->
+        <ScrollView Grid.Row="2">
+            <StackLayout Padding="10" Spacing="20">
 
-                    <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
-                    <Label Text="Hubo leve sangrado, controlado exitosamente. Recuperación rápida." 
-                           FontAttributes="Italic"
-                           TextColor="Gray"/>
-                </StackLayout>
-            </Frame>
+                <!-- Operación 1 -->
+                <Frame CornerRadius="15" BorderColor="Black" Padding="15">
+                    <StackLayout Spacing="10">
+                        <Label Text="Operación - 12/03/2024" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+                        <Label Text="Tipo: Apendicectomía"/>
+                        <Label Text="Paciente: Ana Rodríguez"/>
+                        <Label Text="Cirujano: Dr. Luis Ramírez"/>
+                        <Label Text="Hora: 08:15 AM"/>
+                        <Label Text="Quirófano: Sala 2"/>
+                        <Label Text="Estado: Finalizada"/>
 
-        </StackLayout>
-    </ScrollView>
+                        <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
+                        <Label Text="Paciente respondió favorablemente. Sin complicaciones." 
+                               FontAttributes="Italic"
+                               TextColor="Gray"/>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Operación 2 -->
+                <Frame CornerRadius="15" BorderColor="Black" Padding="15">
+                    <StackLayout Spacing="10">
+                        <Label Text="Operación - 25/11/2023" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+                        <Label Text="Tipo: Cirugía de vesícula"/>
+                        <Label Text="Paciente: Ana Rodríguez"/>
+                        <Label Text="Cirujano: Dra. María Torres"/>
+                        <Label Text="Hora: 03:00 PM"/>
+                        <Label Text="Quirófano: Sala 1"/>
+                        <Label Text="Estado: Finalizada"/>
+
+                        <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
+                        <Label Text="Hubo leve sangrado, controlado exitosamente. Recuperación rápida." 
+                               FontAttributes="Italic"
+                               TextColor="Gray"/>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

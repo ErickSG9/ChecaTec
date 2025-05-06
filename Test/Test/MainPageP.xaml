@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Test.MainPage"
-             Title="Hola doctor"
+             x:Class="Test.MainPageP"
+             Title="Bienvenido"
              BackgroundColor="White">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="logout.png"
@@ -39,7 +39,6 @@
                 <Button Text="EXPEDIENTE CLINICO" Clicked="OnHistorialClicked" Style="{StaticResource MenuButtonStyle}" />                
                 <Button Text="RECETA MÉDICA" Clicked="OnRecetaClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="PERSONAL MÉDICO" Clicked="OnPersonalClicked" Style="{StaticResource MenuButtonStyle}" />
-                <Button Text="Usuarios" Clicked="OnUsersClicked" Style="{StaticResource MenuButtonStyle}" />
                 <!--<Button Text="DB" Clicked="OnDBClicked" Style="{StaticResource MenuButtonStyle}" /> -->
             </StackLayout>
         </Grid>

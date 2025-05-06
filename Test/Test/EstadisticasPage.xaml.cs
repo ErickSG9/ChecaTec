@@ -14,5 +14,9 @@ namespace Test
         {
             InitializeComponent();
         }
+        private async void OnHistorialClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HistorialPage());
+        }
     }
 }
