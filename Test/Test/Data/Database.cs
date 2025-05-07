@@ -11,7 +11,6 @@ namespace Test.Data
         public static void InitializeDatabase()
         {
             var db = GetConnection();
-            db.Execute("DROP TABLE IF EXISTS Operacion;");
             db.CreateTable<Usuario>();
             db.CreateTable<Paciente>();
             db.CreateTable<Receta>();
