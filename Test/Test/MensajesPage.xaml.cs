@@ -123,7 +123,7 @@ namespace Test
                 var receptor = Database.GetUsuarioPorId(chat.IdReceptor);
                 if (receptor != null)
                 {
-                    await Navigation.PushAsync(new PacientePage(receptor));
+                    await Navigation.PushAsync(new HistorialPage(receptor.IdUsuario));
                 }
                 else
                 {

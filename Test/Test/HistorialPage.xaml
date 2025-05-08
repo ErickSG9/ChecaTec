@@ -6,10 +6,10 @@
              BackgroundColor="White">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Inicio"
+        <!-- <ToolbarItem Text="Inicio"
                      Priority="0"
                      Order="Primary"
-                     Clicked="OnMainClicked" />
+                     Clicked="OnMainClicked" />-->
     </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="Auto, Auto, *">

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Test.Data;
 using Xamarin.Forms;
 
@@ -11,9 +6,17 @@ namespace Test
 {
     public partial class HistorialPage : ContentPage
     {
-        public HistorialPage()
+        private int receptorId;
+        public HistorialPage(int idUsuario)
         {
             InitializeComponent();
+            CargarOperaciones(idUsuario); 
+            receptorId = idUsuario;
+        }
+        private void CargarOperaciones(int idUsuario)
+        {
+            var operaciones = Database.ObtenerOperacionesPorPaciente(idUsuario);
+            ListaOperaciones.ItemsSource = operaciones; // Asegúrate de tener este CollectionView en el XAML
         }
         private async void OnEstadisticasClicked(object sender, EventArgs e)
         {
@@ -27,12 +30,23 @@ namespace Test
         {
             base.OnAppearing();
 
-            var operaciones = Database.ObtenerOperacionesPorPaciente(App.UsuarioActual.IdUsuario);
+            int idPaciente;
+
+            if (App.UsuarioActual.Rol == "Médico" && receptorId != 0)
+            {
+                idPaciente = receptorId;
+            }
+            else
+            {
+                idPaciente = App.UsuarioActual.IdUsuario;
+            }
+
+            var operaciones = Database.ObtenerOperacionesPorPaciente(idPaciente);
             ListaOperaciones.ItemsSource = operaciones;
         }
         private async void OnNuevoClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AgregarOperacionPage());
+            await Navigation.PushAsync(new AgregarOperacionPage(receptorId));
         }
     }
 }

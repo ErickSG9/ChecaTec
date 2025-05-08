@@ -7,9 +7,10 @@ namespace Test
 {
     public partial class AgregarOperacionPage : ContentPage
     {
-        public AgregarOperacionPage()
+        private int receptorId;
+        public AgregarOperacionPage(int idReceptor)
         {
-            InitializeComponent();
+            InitializeComponent(); receptorId = idReceptor;
         }
 
         private async void OnGuardarClicked(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace Test
                 Quirofano = quirofanoEntry.Text,
                 Estado = estadoPicker.SelectedItem.ToString(),
                 Observaciones = observacionesEditor.Text,
-                IdUsuario = App.UsuarioActual.IdUsuario
+                IdUsuario = receptorId
             };
 
             try

@@ -35,11 +35,6 @@
                             <!-- Hora + Botón perfil -->
                             <StackLayout Grid.Column="2" Spacing="5" VerticalOptions="Start">
                                 <Label Text="{Binding Hora}" FontSize="12" TextColor="Gray"/>
-                                <Button Text="Perfil"
-                                        FontSize="10"
-                                        Padding="0"
-                                        Clicked="VerPerfil_Clicked"
-                                        CommandParameter="{Binding .}" />
                             </StackLayout>
                         </Grid>
                     </Frame>
