@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Test.Data;
+using Test.Models;
 using Xamarin.Forms;
 
 namespace Test
@@ -10,17 +12,23 @@ namespace Test
         public HistorialPage(int idUsuario)
         {
             InitializeComponent();
-            CargarOperaciones(idUsuario); 
+            CargarConsultas(idUsuario); 
             receptorId = idUsuario;
         }
-        private void CargarOperaciones(int idUsuario)
+        private void CargarConsultas(int idUsuario)
         {
-            var operaciones = Database.ObtenerOperacionesPorPaciente(idUsuario);
-            ListaOperaciones.ItemsSource = operaciones; // Asegúrate de tener este CollectionView en el XAML
+            var consultas = Database.ObtenerConsultasPorPaciente(idUsuario);
+            ListaConsultas.ItemsSource = consultas; 
         }
         private async void OnEstadisticasClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EstadisticasPage());
+            var receptor = Database.GetUsuarioPorId(receptorId);
+            await Navigation.PushAsync(new PacientePage(receptor));
+        }
+        private async void OnPerfilClicked(object sender, EventArgs e)
+        {
+            var receptor = Database.GetUsuarioPorId(receptorId);
+            await Navigation.PushAsync(new PacientePage(receptor));
         }
         private async void OnMainClicked(object sender, EventArgs e)
         {
@@ -29,24 +37,32 @@ namespace Test
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            int idPaciente;
+            var usuarioActual = App.UsuarioActual; 
+            int idUsuario = usuarioActual.IdUsuario;
 
             if (App.UsuarioActual.Rol == "Médico" && receptorId != 0)
             {
-                idPaciente = receptorId;
+                idUsuario = receptorId;
             }
             else
             {
-                idPaciente = App.UsuarioActual.IdUsuario;
+                idUsuario = App.UsuarioActual.IdUsuario;
             }
 
-            var operaciones = Database.ObtenerOperacionesPorPaciente(idPaciente);
-            ListaOperaciones.ItemsSource = operaciones;
+            var consultas = Database.ObtenerConsultasPorPaciente(idUsuario)
+                        .OrderByDescending(c => c.Fecha)
+                        .ToList();
+            foreach (var consulta in consultas)
+            {
+                var doctor = Database.GetUsuarioPorId(consulta.IdDoctor);
+                consulta.NombreDoctor = doctor?.Nombre ?? "Desconocido";
+            }
+            ListaConsultas.ItemsSource = null;
+            ListaConsultas.ItemsSource = consultas;
         }
         private async void OnNuevoClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AgregarOperacionPage(receptorId));
+            await Navigation.PushAsync(new AgregarConsultaPage(receptorId));
         }
     }
 }

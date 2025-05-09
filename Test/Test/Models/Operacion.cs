@@ -9,7 +9,7 @@ namespace Test.Models
         [PrimaryKey, AutoIncrement]
         public int IdOperacion { get; set; }
 
-        public int IdUsuario { get; set; } // Relación con el usuario
+        public int IdUsuario { get; set; } 
 
         public DateTime Fecha { get; set; }
 

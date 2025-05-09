@@ -16,6 +16,7 @@ namespace Test.Data
             db.CreateTable<Receta>();
             db.CreateTable<HistorialClinico>();
             db.CreateTable<Chat>(); 
+            db.CreateTable<Consulta>();
             db.CreateTable<Operacion>();
         }
         private static SQLiteConnection _database;
@@ -155,5 +156,16 @@ namespace Test.Data
             db.CreateTable<Operacion>(); // Asegura que la tabla exista
             db.Insert(operacion);
         }
+        public static void InsertarConsulta(Consulta consulta)
+        {
+            var db = GetConnection();
+            db.Insert(consulta);
+        }
+        public static List<Consulta> ObtenerConsultasPorPaciente(int idPaciente)
+        {
+            var db = GetConnection();
+            return db.Table<Consulta>().Where(c => c.IdUsuario == idPaciente).ToList();
+        }
+
     }
 }

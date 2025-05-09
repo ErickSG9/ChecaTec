@@ -1,4 +1,4 @@
--- Tabla de Usuarios
+﻿-- Tabla de Usuarios
 CREATE TABLE Usuarios (
     IdUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
     Nombre TEXT NOT NULL,
@@ -54,6 +54,22 @@ CREATE TABLE Chat (
     Leido BOOLEAN DEFAULT 0, -- 0: No leído, 1: Leído
     FOREIGN KEY (IdEmisor) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE,
     FOREIGN KEY (IdReceptor) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
+);
+-- Tabla de Consultas
+CREATE TABLE Consulta (
+    IdConsulta INTEGER PRIMARY KEY AUTOINCREMENT,
+    IdUsuario INTEGER NOT NULL,         
+    IdDoctor INTEGER NOT NULL,          
+    Fecha DATETIME NOT NULL,            
+    Hora TEXT NOT NULL,                 
+    Motivo TEXT NOT NULL,
+    Estado TEXT NOT NULL, 
+    PresionArterial TEXT,       
+    FrecuenciaCardiaca INTEGER,   
+    Temperatura REAL, 
+    Observaciones TEXT,
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE,
+    FOREIGN KEY (IdDoctor) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
 );
 -- Tabla de Operaciones 
 CREATE TABLE Operacion (

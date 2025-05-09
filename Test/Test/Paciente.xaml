@@ -2,25 +2,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.PacientePage"
-             Title="Expediente de:?? "
+             Title="Perfil"
              BackgroundColor="White">
+    <Grid RowDefinitions="Auto, Auto, *">
+        <!-- Botones MENSAJES y ESTADISTICAS -->
+    <Grid Grid.Row="0" ColumnSpacing="0" RowSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="15">
-            <Label Text="Información del Paciente" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Button Grid.Column="0" 
+                    Text="HISTORIAL" 
+                    Clicked="OnHistorialClicked"
+                    BackgroundColor="White"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    BorderWidth="1"/>
 
-            <Label Text="{Binding IdUsuario}" />
-            <Label Text="{Binding Nombre}" FontAttributes="Bold" />
-            <Label Text="{Binding Apellidos}" />
-            <Label Text="{Binding Edad}" />
-            <Label Text="{Binding Telefono}" />
-            <Label Text="{Binding Email}" />
-            <Label Text="{Binding Contrasena}" />
+        <Button Grid.Column="1" 
+                    Text="Perfil" 
+                    BackgroundColor="White"
+                    FontAttributes="Bold"
+                    TextColor="Black"
+                    BorderColor="Black"
+                    BorderWidth="1"/>
+         </Grid>
+
+        <StackLayout Grid.Row="2" Padding="20" Spacing="15">
+            <Label Text="{Binding Nombre,StringFormat='Información de {0}'}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="{Binding Nombre, StringFormat='Nombre: {0}'}" FontAttributes="Bold" />
+            <Label Text="{Binding Apellidos, StringFormat='Apellidos: {0}'}" />
+            <Label Text="{Binding Edad, StringFormat='Edad: {0}'}" />
+            <Label Text="{Binding Telefono, StringFormat='Tel. {0}'}" />
+            <Label Text="{Binding Email, StringFormat='Correo: {0}'}" />
+        <Label Text="{Binding Contrasena}" />
             <Label Text="{Binding Rol}" />
-            <Label Text="{Binding ParentescoE}" />
-            <Label Text="{Binding NombreE}" />
-            <Label Text="{Binding TelefonoE}" />
-            <Label Text="{Binding FechaRegistro, StringFormat='Registrado el: {0:dd/MM/yyyy}'}" />
+            <Label Text="Datos de emergencia:" FontAttributes="Bold" Margin="0,10,0,0"/>
+            <Label Text="{Binding NombreE, StringFormat='Nombre: {0}'}" />
+            <Label Text="{Binding ParentescoE, StringFormat='Parentezco: {0}'}" />
+            <Label Text="{Binding TelefonoE, StringFormat='Tel. {0}'}" />
+        <Label Text="{Binding FechaRegistro, StringFormat='Registrado el: {0:dd/MM/yyyy}'}" />
         </StackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>
