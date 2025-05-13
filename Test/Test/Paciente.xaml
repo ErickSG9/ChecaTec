@@ -39,6 +39,15 @@
             <Label Text="{Binding Email, StringFormat='Correo: {0}'}" />
         <Label Text="{Binding Contrasena}" />
             <Label Text="{Binding Rol}" />
+            <Label Text="Información médica:" FontAttributes="Bold" Margin="0,10,0,0"/>
+            <Label Text="{Binding Genero, StringFormat='Género: {0}'}" />
+            <Label Text="{Binding Peso, StringFormat='Peso: {0} kg'}" />
+            <Label Text="{Binding Altura, StringFormat='Altura: {0} cm'}" />
+            <Label Text="{Binding Alergias, StringFormat='Alergias: {0}'}" />
+            <Label Text="{Binding AntecedentesClinicos, StringFormat='Antecedentes clínicos: {0}'}" />
+            <Label Text="{Binding Medicamentos, StringFormat='Medicamentos: {0}'}" />
+            <Label Text="{Binding Vacunas, StringFormat='Vacunas: {0}'}" />
+            <Label Text="{Binding Discapacidad, StringFormat='Discapacidad: {0}'}" />
             <Label Text="Datos de emergencia:" FontAttributes="Bold" Margin="0,10,0,0"/>
             <Label Text="{Binding NombreE, StringFormat='Nombre: {0}'}" />
             <Label Text="{Binding ParentescoE, StringFormat='Parentezco: {0}'}" />

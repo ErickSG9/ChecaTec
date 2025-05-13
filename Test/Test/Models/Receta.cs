@@ -17,7 +17,7 @@ namespace Test.Models
 
         // Claves foráneas (solo para referencia en código, no en SQLite)
         [Ignore]
-        public Paciente Paciente { get; set; }
+        public Pacientes Paciente { get; set; }
 
         [Ignore]
         public Usuario Profesional { get; set; }

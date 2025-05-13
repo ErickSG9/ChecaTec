@@ -22,13 +22,15 @@ namespace Test
         }
         private async void OnEstadisticasClicked(object sender, EventArgs e)
         {
-            var receptor = Database.GetUsuarioPorId(receptorId);
-            await Navigation.PushAsync(new PacientePage(receptor));
+            var receptor = Database.GetUsuarioPorId(receptorId); 
+            var paciente = Database.GetPacientePorId(receptor.IdUsuario);
+            await Navigation.PushAsync(new PacientePage(receptor, paciente));
         }
         private async void OnPerfilClicked(object sender, EventArgs e)
         {
             var receptor = Database.GetUsuarioPorId(receptorId);
-            await Navigation.PushAsync(new PacientePage(receptor));
+            var paciente = Database.GetPacientePorId(receptor.IdUsuario);
+            await Navigation.PushAsync(new PacientePage(receptor, paciente));
         }
         private async void OnMainClicked(object sender, EventArgs e)
         {

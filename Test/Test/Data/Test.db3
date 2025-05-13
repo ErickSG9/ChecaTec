@@ -14,7 +14,17 @@ CREATE TABLE Pacientes (
     IdUsuario INTEGER NOT NULL,
     FechaNacimiento DATE NOT NULL,
     NumeroSeguro TEXT,
-    Telefono TEXT,
+    Telefono TEXT,  
+    Nombre TEXT NOT NULL,
+    Apellidos TEXT NOT NULL,
+    Genero TEXT,
+    Peso REAL,
+    Altura REAL,
+    Alergias TEXT,
+    AntecedentesClinicos TEXT,
+    Medicamentos TEXT,
+    Vacunas TEXT,
+    Discapacidad TEXT,
     FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
 );
 

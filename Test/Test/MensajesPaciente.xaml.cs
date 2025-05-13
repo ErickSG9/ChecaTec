@@ -108,10 +108,11 @@ namespace Test
             var boton = sender as Button;
             if (boton?.CommandParameter is ChatResumen chat)
             {
-                var receptor = Database.GetUsuarioPorId(chat.IdReceptor);
+                var receptor = Database.GetUsuarioPorId(chat.IdReceptor); 
+                var paciente = Database.GetPacientePorId(receptor.IdUsuario);
                 if (receptor != null)
                 {
-                    await Navigation.PushAsync(new PacientePage(receptor));
+                   await Navigation.PushAsync(new PacientePage(receptor, paciente));
                 }
                 else
                 {

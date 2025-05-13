@@ -10,9 +10,9 @@ namespace Test.Data
     {
         public static void InitializeDatabase()
         {
-            var db = GetConnection();
+            var db = GetConnection(); 
             db.CreateTable<Usuario>();
-            db.CreateTable<Paciente>();
+            db.CreateTable<Pacientes>();
             db.CreateTable<Receta>();
             db.CreateTable<HistorialClinico>();
             db.CreateTable<Chat>(); 
@@ -31,16 +31,7 @@ namespace Test.Data
             return _database;
         }
 
-        public class Paciente
-    {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public DateTime FechaNacimiento { get; set; }
-        public string Sexo { get; set; }
-    }
-        public static void RegistrarUsuario(string nombre, string apellidos, int edad, double telefono, string email, string contrasena, string rol, string nomE, string parE, double telE)
+        public static void RegistrarUsuario(string nombre, string apellidos, int edad, string telefono, string email, string contrasena, string rol, string nomE, string parE, string telE)
         {
             var db = GetConnection();
 
@@ -64,7 +55,7 @@ namespace Test.Data
                 NombreE = nomE,
                 ParentescoE = parE,
                 TelefonoE = telE,
-                FechaRegistro = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                FechaRegistro = DateTime.Now
             };
 
             db.Insert(nuevoUsuario);
@@ -145,6 +136,11 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Usuario>().FirstOrDefault(u => u.IdUsuario == id);
         }
+        public static Pacientes GetPacientePorId(int id)
+        {
+            var db = GetConnection();
+            return db.Table<Pacientes>().FirstOrDefault(u => u.IdPaciente == id);
+        }
         public static List<Operacion> ObtenerOperacionesPorPaciente(int idPaciente)
         {
             var db = GetConnection();
@@ -165,6 +161,38 @@ namespace Test.Data
         {
             var db = GetConnection();
             return db.Table<Consulta>().Where(c => c.IdUsuario == idPaciente).ToList();
+        }
+        public static void RegistrarPaciente(
+    int idUsuario,
+    DateTime fechaNacimiento,
+    string numeroSeguro,
+    string genero,
+    double peso,
+    double altura,
+    string alergias,
+    string antecedentes,
+    string medicamentos,
+    string vacunas,
+    string discapacidad)
+        {
+            var db = GetConnection();
+
+            var nuevoPaciente = new Pacientes
+            {
+                IdUsuario = idUsuario,
+                FechaNacimiento = fechaNacimiento,
+                NumeroSeguro = numeroSeguro,
+                Genero = genero,
+                Peso = peso,
+                Altura = altura,
+                Alergias = alergias,
+                AntecedentesClinicos = antecedentes,
+                Medicamentos = medicamentos,
+                Vacunas = vacunas,
+                Discapacidad = discapacidad
+            };
+
+            db.Insert(nuevoPaciente);
         }
 
     }

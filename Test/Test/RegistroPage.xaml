@@ -30,29 +30,68 @@
             BackgroundColor="Transparent"
             Clicked="VerContrasena_Clicked"/>
         <Label Text="Rol" TextColor="Black"/>
-            <Picker x:Name="pickerRol" SelectedIndexChanged="pickerRol_SelectedIndexChanged">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Médico</x:String>
-                        <x:String>Paciente</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+                <Picker x:Name="pickerRol" SelectedIndexChanged="pickerRol_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Médico</x:String>
+                            <x:String>Paciente</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <StackLayout x:Name="pacienteLayout" IsVisible="False">
 
-            <StackLayout x:Name="emergenciaLayout" IsVisible="False">
+                    <Label Text="Género" TextColor="Black"/>
+                    <Picker x:Name="pickerGenero">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Masculino</x:String>
+                                <x:String>Femenino</x:String>
+                                <x:String>Otro</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Label Text="Fecha de Nacimiento" TextColor="Black"/>
+                    <DatePicker x:Name="fechaNacimientoPicker" TextColor="Black" />
 
-            <Label Text="Datos de emergencia" TextColor="Black"/>
+                    <Label Text="Número de Seguro" TextColor="Black"/>
+                    <Entry x:Name="entryNumeroSeguro" Placeholder="Número de seguro" TextColor="Black" BackgroundColor="#f0f0f0" />
 
-            <Label Text="Nombre" TextColor="Black"/>
-            <Entry x:Name="entryNomE" Placeholder="Ingrese su nombre" TextColor="Black" BackgroundColor="#f0f0f0"/>
+                    <Label Text="Peso (kg)" TextColor="Black"/>
+                    <Entry x:Name="entryPeso" Placeholder="Ej. 70.5" Keyboard="Numeric" TextColor="Black" BackgroundColor="#f0f0f0"/>
 
-            <Label Text="Parentesco" TextColor="Black"/>
-            <Entry x:Name="entryParE" Placeholder="Ingrese su parentesco" TextColor="Black" BackgroundColor="#f0f0f0"/>
+                    <Label Text="Altura (cm)" TextColor="Black"/>
+                    <Entry x:Name="entryAltura" Placeholder="Ej. 175" Keyboard="Numeric" TextColor="Black" BackgroundColor="#f0f0f0"/>
 
-            <Label Text="Teléfono" TextColor="Black"/>
-            <Entry x:Name="entryTelE" Placeholder="**********" TextColor="Black" BackgroundColor="#f0f0f0"/>
-            </StackLayout>
-            <Button Text="Registrar"
+                    <Label Text="Alergias" TextColor="Black"/>
+                    <Editor x:Name="editorAlergias" Placeholder="Ingrese alergias" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Antecedentes clínicos" TextColor="Black"/>
+                    <Editor x:Name="editorAntecedentes" Placeholder="Ej. Asma, hipertensión" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Medicamentos actuales" TextColor="Black"/>
+                    <Editor x:Name="editorMedicamentos" Placeholder="Ej. Paracetamol, Insulina" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Vacunas" TextColor="Black"/>
+                    <Editor x:Name="editorVacunas" Placeholder="Ej. COVID-19, Hepatitis B" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Discapacidad" TextColor="Black"/>
+                    <Editor x:Name="editorDiscapacidad" Placeholder="Describa si aplica" TextColor="Black" BackgroundColor="#f0f0f0"/>
+                </StackLayout>
+                <StackLayout x:Name="emergenciaLayout" IsVisible="False">
+
+                    <Label Text="Datos de emergencia" TextColor="Black"/>
+
+                    <Label Text="Nombre" TextColor="Black"/>
+                    <Entry x:Name="entryNomE" Placeholder="Ingrese su nombre" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Parentesco" TextColor="Black"/>
+                    <Entry x:Name="entryParE" Placeholder="Ingrese su parentesco" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Teléfono" TextColor="Black"/>
+                    <Entry x:Name="entryTelE" Placeholder="**********" TextColor="Black" BackgroundColor="#f0f0f0"/>
+                </StackLayout>
+
+                <Button Text="Registrar"
                 BackgroundColor="#007AFF"
                 TextColor="White"
                 Clicked="RegistrarUsuario_Clicked"/>

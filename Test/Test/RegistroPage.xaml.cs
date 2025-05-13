@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Test.Views;
 using Test.Data;
+using Test.Models;
 
 namespace Test
 {
@@ -11,23 +12,31 @@ namespace Test
         {
             InitializeComponent();
         }
+
         private void VerContrasena_Clicked(object sender, EventArgs e)
         {
             entryContrasena.IsPassword = !entryContrasena.IsPassword;
             btnVerContrasena.Text = entryContrasena.IsPassword ? "👁️" : "🙈";
         }
+
         private async void RegistrarUsuario_Clicked(object sender, EventArgs e)
         {
             try
             {
-                // Obtener los valores obligatorios
+                // Obtener valores
                 string nombre = entryNombre.Text;
                 string apellidos = entryApellidos.Text;
                 string email = entryEmail.Text;
                 string contrasena = entryContrasena.Text;
                 string rol = pickerRol.SelectedItem?.ToString();
 
-                // Validación básica
+                string genero = null;
+                double peso = 0, altura = 0;
+                string alergias = "", antecedentes = "", medicamentos = "", vacunas = "", discapacidad = "";
+                DateTime fechaNacimiento = fechaNacimientoPicker.Date;
+                string numeroSeguro = entryNumeroSeguro.Text;
+
+                // Validaciones
                 if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(email) ||
                     string.IsNullOrEmpty(contrasena) || string.IsNullOrEmpty(rol) ||
                     string.IsNullOrEmpty(apellidos))
@@ -48,33 +57,59 @@ namespace Test
                     return;
                 }
 
-                // Datos de emergencia (opcionales)
-                string nomE = string.Empty;
-                string parE = string.Empty;
-                int telE = 0;
+                // Datos de emergencia
+                string nomE = entryNomE.Text;
+                string parE = entryParE.Text;
+                string telEmergencia = entryTelE.Text;
 
                 if (rol == "Paciente")
                 {
-                    nomE = entryNomE.Text;
-                    parE = entryParE.Text;
+                    genero = pickerGenero.SelectedItem?.ToString();
+                    double.TryParse(entryPeso.Text, out peso);
+                    double.TryParse(entryAltura.Text, out altura);
+                    alergias = editorAlergias.Text;
+                    antecedentes = editorAntecedentes.Text;
+                    medicamentos = editorMedicamentos.Text;
+                    vacunas = editorVacunas.Text;
+                    discapacidad = editorDiscapacidad.Text;
 
-                    // Si alguno de estos campos tiene algo, validamos
-                    if (!string.IsNullOrWhiteSpace(entryTelE.Text))
+                    if (!string.IsNullOrWhiteSpace(telEmergencia) && !long.TryParse(telEmergencia, out _))
                     {
-                        if (!int.TryParse(entryTelE.Text, out telE))
-                        {
-                            await DisplayAlert("Error", "Teléfono de emergencia inválido", "OK");
-                            return;
-                        }
+                        await DisplayAlert("Error", "Teléfono de emergencia inválido", "OK");
+                        return;
                     }
                 }
 
-                // Registrar en SQLite
-                Database.RegistrarUsuario(nombre, apellidos, edad, telefono, email, contrasena, rol, nomE, parE, telE);
+                // 1. Registrar el usuario
+                Database.RegistrarUsuario(nombre, apellidos, edad, telefono.ToString(), email, contrasena, rol, nomE, parE, telEmergencia);
+
+                // 2. Obtener el ID del usuario recién creado
+                var usuario = Database.GetUsuarioPorId(
+                    Database.GetConnection().Table<Usuario>()
+                    .Where(u => u.Email == email)
+                    .OrderByDescending(u => u.IdUsuario)
+                    .First().IdUsuario
+                );
+
+                // 3. Si es paciente, registrar datos clínicos
+                if (rol == "Paciente")
+                {
+                    Database.RegistrarPaciente(
+                        usuario.IdUsuario,
+                        fechaNacimiento,
+                        numeroSeguro,
+                        genero,
+                        peso,
+                        altura,
+                        alergias,
+                        antecedentes,
+                        medicamentos,
+                        vacunas,
+                        discapacidad
+                    );
+                }
 
                 await DisplayAlert("Éxito", "Usuario registrado correctamente", "OK");
-
-                // Redirigir al Login
                 Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
             catch (Exception ex)
@@ -86,12 +121,8 @@ namespace Test
         private void pickerRol_SelectedIndexChanged(object sender, EventArgs e)
         {
             var rolSeleccionado = pickerRol.SelectedItem?.ToString();
-
-            // Mostrar campos de emergencia solo si el usuario es Paciente
-            if (rolSeleccionado == "Paciente")
-                emergenciaLayout.IsVisible = true;
-            else
-                emergenciaLayout.IsVisible = false;
+            pacienteLayout.IsVisible = rolSeleccionado == "Paciente";
+            emergenciaLayout.IsVisible = rolSeleccionado == "Paciente";
         }
     }
 }
