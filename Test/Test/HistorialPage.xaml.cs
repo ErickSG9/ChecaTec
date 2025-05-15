@@ -18,7 +18,9 @@ namespace Test
 
         protected override void OnAppearing()
         {
+            
             base.OnAppearing();
+            
 
             int idUsuario = receptorId != 0 ? receptorId : App.UsuarioActual.IdUsuario;
 
@@ -35,10 +37,16 @@ namespace Test
             var operaciones = Database.ObtenerOperacionesPorPaciente(idUsuario)
                 .OrderByDescending(c => c.Fecha)
                 .ToList();
-            var recetas = Database.ObtenerRecetasPorPaciente(idUsuario)
-                .Where(r => r.Activa == false)
-                .OrderByDescending(c => c.FechaEmision)
-                .ToList(); 
+            var recetas = Database.ObtenerRecetasPorPaciente(idUsuario);
+            if (App.UsuarioActual.Rol == "Paciente")
+            {
+                recetas = recetas.Where(r => r.Activa == false).ToList();
+            }
+            else
+            {
+                recetas = recetas.ToList();
+            }
+
             foreach (var receta in recetas)
             {
                 var doctor = Database.GetUsuarioPorId(receta.IdProfesional);
@@ -51,7 +59,8 @@ namespace Test
             MostrarConsultas(false);
             MostrarOperaciones(false); 
             MostrarRecetas(true);
-            FiltroHistorial.SelectedItem = 2;
+            FiltroHistorial.SelectedItem = 2; 
+            BotonAgregar.IsVisible = App.UsuarioActual.Rol == "Médico";
         }
 
         private void FiltroHistorial_SelectedIndexChanged(object sender, EventArgs e)

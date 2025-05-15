@@ -23,6 +23,8 @@ namespace Test.Models
 
         [Ignore]
         public string Profesional { get; set; }
+        [Ignore]
+        public string EstadoReceta => Activa ? "Activo" : "Completado";
     }
 }
     
