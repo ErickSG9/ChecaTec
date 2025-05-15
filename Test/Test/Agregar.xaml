@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Test.Agregar"
+             Title="Agregar Operación"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+
+            <!-- Picker de selección -->
+            <Picker x:Name="Generar" Title="Generar" SelectedIndexChanged="Generar_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Receta</x:String>
+                    <x:String>Consulta</x:String>
+                    <x:String>Operacion</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <!-- Sección para CONSULTA -->
+            <StackLayout x:Name="ConsultaLayout" IsVisible="False" Spacing="10">
+                <Label Text="Motivo de la Consulta"/>
+                <Entry x:Name="motivoEntry" Placeholder="Motivo" />
+
+                <Label Text="Estado"/>
+                <Picker x:Name="estadoCPicker">
+                    <Picker.Items>
+                        <x:String>Programada</x:String>
+                        <x:String>En progreso</x:String>
+                        <x:String>Finalizada</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry x:Name="presionEntry" Placeholder="Precion arteral" />
+                <Entry x:Name="frecuenciaEntry" Keyboard="Numeric" Placeholder="Frecuencia cardiaca" />
+                <Entry x:Name="temperaturaEntry" Keyboard="Numeric" Placeholder="Temperatura" />
+                <Label Text="Observaciones"/>
+                <Editor x:Name="observacionesCEditor" HeightRequest="80" />
+                <Button Text="Guardar" Clicked="OnGuardarCClicked" BackgroundColor="#2196F3" TextColor="White"/>
+            </StackLayout>
+            <!-- Sección para OPERACION -->
+            <StackLayout x:Name="OperacionLayout" IsVisible="False" Padding="20" Spacing="15">
+                <Label Text="Registrar Nueva Operación" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                <Entry x:Name="tipoEntry" Placeholder="Tipo de operación" />
+                <Entry x:Name="cirujanoEntry" Placeholder="Nombre del cirujano" />
+                <TimePicker x:Name="horaPicker" />
+                <Entry x:Name="quirofanoEntry" Placeholder="Número de quirófano o sala" />
+                <Picker x:Name="estadoOPicker" Title="Estado">
+                    <Picker.Items>
+                        <x:String>Finalizada</x:String>
+                        <x:String>En proceso</x:String>
+                        <x:String>Cancelada</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Editor x:Name="observacionesOEditor" Placeholder="Observaciones..." HeightRequest="100" />
+                <Button Text="Guardar" Clicked="OnGuardarOClicked" BackgroundColor="#2196F3" TextColor="White"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

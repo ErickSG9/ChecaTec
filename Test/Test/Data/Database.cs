@@ -162,18 +162,7 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Consulta>().Where(c => c.IdUsuario == idPaciente).ToList();
         }
-        public static void RegistrarPaciente(
-    int idUsuario,
-    DateTime fechaNacimiento,
-    string numeroSeguro,
-    string genero,
-    double peso,
-    double altura,
-    string alergias,
-    string antecedentes,
-    string medicamentos,
-    string vacunas,
-    string discapacidad)
+        public static void RegistrarPaciente(int idUsuario,DateTime fechaNacimiento,string numeroSeguro,string genero,double peso,double altura,string alergias,string antecedentes,string medicamentos,string vacunas,string discapacidad)
         {
             var db = GetConnection();
 

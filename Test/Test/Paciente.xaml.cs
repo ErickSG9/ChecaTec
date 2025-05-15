@@ -12,9 +12,9 @@ namespace Test
         public PacientePage(Usuario usuario, Pacientes paciente)
         {
             InitializeComponent();
-            if (usuario == null || paciente == null)
+            if (paciente == null )
             {
-                DisplayAlert("Error", "Los datos del usuario o del paciente están vacíos", "OK");
+                DisplayAlert("Error", "Los datos del paciente están vacíos", "OK");
                 return;
             }
             _idUsuario = usuario.IdUsuario;
@@ -26,7 +26,6 @@ namespace Test
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
             // Obtener datos de Usuario y Paciente
             var usuario = Database.GetUsuarioPorId(_idUsuario);
             var paciente = Database.GetPacientePorId(_idPaciente);

@@ -9,7 +9,8 @@
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="All"
               RowDefinitions="Auto, Auto, *">
-            <!-- Botones HISTORIAL y ESTADISTICAS -->
+
+            <!-- Botones -->
             <Grid Grid.Row="0" ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -17,46 +18,90 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0"
-                    Text="HISTORIAL"
-                    BackgroundColor="White"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    BorderColor="Black"
-                    BorderWidth="1" />
+                        Text="HISTORIAL"
+                        BackgroundColor="White"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        BorderColor="Black"
+                        BorderWidth="1" />
 
                 <Button Grid.Column="1"
-                    Text="Perfil"
-                    Clicked="OnEstadisticasClicked"
-                    BackgroundColor="White"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    BorderColor="Black"
-                    BorderWidth="1" />
+                        Text="Perfil"
+                        Clicked="OnEstadisticasClicked"
+                        BackgroundColor="White"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        BorderColor="Black"
+                        BorderWidth="1" />
             </Grid>
-            <CollectionView x:Name="ListaConsultas" Grid.Row="2">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
-                            <StackLayout Grid.Row="2" Spacing="10">
-                                <Label Text="{Binding Fecha, StringFormat='Consulta - {0:dd/MM/yyyy}'}"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           HorizontalOptions="Center"/>
-                                <Label Text="{Binding NombreDoctor, StringFormat='Doctor: {0}'}"/>
-                                <Label Text="{Binding Motivo, StringFormat='Motivo: {0}'}"/>
-                                <Label Text="{Binding Hora, StringFormat='Hora: {0}'}"/>
-                                <Label Text="{Binding PresionArterial, StringFormat='Presion: {0}'}"/>
-                                <Label Text="{Binding FrecuenciaCardiaca, StringFormat='Frecuencia cardiaca: {0}'}"/>
-                                <Label Text="{Binding Temperatura, StringFormat='Temperatura: {0}'}"/>
-                                <Label Text="{Binding Estado, StringFormat='Estado: {0}'}"/>
-                                <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0"/>
-                                <Label Text="{Binding Observaciones}" FontAttributes="Italic" TextColor="Gray"/>
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+
+            <!-- Selector para mostrar datos -->
+            <Picker x:Name="FiltroHistorial" Grid.Row="1" Title="Ver">
+                <Picker.Items>
+                    <x:String>Consultas</x:String>
+                    <x:String>Operaciones</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <!-- Contenedor de listas -->
+            <ScrollView Grid.Row="2">
+                <StackLayout Padding="10" Spacing="10">
+                    <!-- Consultas -->
+                    <StackLayout x:Name="ConsultasLayout">
+                        <CollectionView x:Name="ListaConsultas">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
+                                        <StackLayout Spacing="10">
+                                            <Label Text="{Binding Fecha, StringFormat='Consulta - {0:dd/MM/yyyy}'}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="18"
+                                                   HorizontalOptions="Center" />
+                                            <Label Text="{Binding NombreDoctor, StringFormat='Doctor: {0}'}" />
+                                            <Label Text="{Binding Motivo, StringFormat='Motivo: {0}'}" />
+                                            <Label Text="{Binding Hora, StringFormat='Hora: {0}'}" />
+                                            <Label Text="{Binding PresionArterial, StringFormat='Presion: {0}'}" />
+                                            <Label Text="{Binding FrecuenciaCardiaca, StringFormat='Frecuencia cardiaca: {0}'}" />
+                                            <Label Text="{Binding Temperatura, StringFormat='Temperatura: {0}'}" />
+                                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" />
+                                            <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0" />
+                                            <Label Text="{Binding Observaciones}" FontAttributes="Italic" TextColor="Gray" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                    <!-- Operaciones -->
+                    <StackLayout x:Name="OperacionesLayout">
+                        <CollectionView x:Name="ListaOperaciones">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
+                                        <StackLayout Spacing="10">
+                                            <Label Text="{Binding Fecha, StringFormat='Operación - {0:dd/MM/yyyy}'}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="18"
+                                                   HorizontalOptions="Center" />
+                                            <Label Text="{Binding Tipo, StringFormat='Tipo: {0}'}" />
+                                            <Label Text="{Binding Cirujano, StringFormat='Cirujano: {0}'}" />
+                                            <Label Text="{Binding Hora, StringFormat='Hora: {0}'}" />
+                                            <Label Text="{Binding Quirofano, StringFormat='Quirófano: {0}'}" />
+                                            <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" />
+                                            <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0" />
+                                            <Label Text="{Binding Observaciones}" FontAttributes="Italic" TextColor="Gray" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
         </Grid>
+
+        <!-- Botón  -->
         <Button Text="＋"
                 AbsoluteLayout.LayoutBounds="1,1,60,60"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
@@ -68,5 +113,5 @@
                 Clicked="OnNuevoClicked"
                 TranslationY="-20"
                 TranslationX="-20" />
-        </AbsoluteLayout>
+    </AbsoluteLayout>
 </ContentPage>
