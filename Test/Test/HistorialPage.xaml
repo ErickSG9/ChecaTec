@@ -27,7 +27,7 @@
 
                 <Button Grid.Column="1"
                         Text="Perfil"
-                        Clicked="OnEstadisticasClicked"
+                        Clicked="OnPerfilClicked"
                         BackgroundColor="White"
                         FontAttributes="Bold"
                         TextColor="Black"
@@ -35,36 +35,56 @@
                         BorderWidth="1" />
             </Grid>
 
-            <!-- Selector para mostrar datos -->
-            <Picker x:Name="FiltroHistorial" Grid.Row="1" Title="Ver">
+            <!-- Selector -->
+            <Picker x:Name="FiltroHistorial"
+                    Grid.Row="1"
+                    Title="Ver"
+                    SelectedIndexChanged="FiltroHistorial_SelectedIndexChanged">
                 <Picker.Items>
+                    <x:String>Recetas</x:String>
                     <x:String>Consultas</x:String>
                     <x:String>Operaciones</x:String>
                 </Picker.Items>
             </Picker>
-
-            <!-- Contenedor de listas -->
+            <!-- Contenedor -->
             <ScrollView Grid.Row="2">
                 <StackLayout Padding="10" Spacing="10">
+                    <!-- Recetas -->
+                    <StackLayout x:Name="RecetasLayout" IsVisible="False">
+                        <CollectionView x:Name="ListaRecetas">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
+                                        <StackLayout Spacing="10">
+                                            <Label Text="{Binding FechaEmision, StringFormat='Receta - {0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+                                            <Label Text="{Binding Medicamento, StringFormat='Medicamento: {0}'}" />
+                                            <Label Text="{Binding Dosis, StringFormat='Dosis: {0}'}" />
+                                            <Label Text="{Binding Instrucciones, StringFormat='Instrucciones: {0}'}" />
+                                            <Label Text="{Binding Nota, StringFormat='Notas: {0}'}" />
+                                            <Label Text="{Binding Profesional, StringFormat='Doctor: {0}'}" />
+                                            <Label Text="{Binding Activa, StringFormat='Estado: {0}'}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
                     <!-- Consultas -->
-                    <StackLayout x:Name="ConsultasLayout">
+                    <StackLayout x:Name="ConsultasLayout" IsVisible="True">
                         <CollectionView x:Name="ListaConsultas">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
                                         <StackLayout Spacing="10">
-                                            <Label Text="{Binding Fecha, StringFormat='Consulta - {0:dd/MM/yyyy}'}"
-                                                   FontAttributes="Bold"
-                                                   FontSize="18"
-                                                   HorizontalOptions="Center" />
+                                            <Label Text="{Binding Fecha, StringFormat='Consulta - {0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
                                             <Label Text="{Binding NombreDoctor, StringFormat='Doctor: {0}'}" />
                                             <Label Text="{Binding Motivo, StringFormat='Motivo: {0}'}" />
                                             <Label Text="{Binding Hora, StringFormat='Hora: {0}'}" />
-                                            <Label Text="{Binding PresionArterial, StringFormat='Presion: {0}'}" />
-                                            <Label Text="{Binding FrecuenciaCardiaca, StringFormat='Frecuencia cardiaca: {0}'}" />
+                                            <Label Text="{Binding PresionArterial, StringFormat='Presión: {0}'}" />
+                                            <Label Text="{Binding FrecuenciaCardiaca, StringFormat='Frecuencia: {0}'}" />
                                             <Label Text="{Binding Temperatura, StringFormat='Temperatura: {0}'}" />
                                             <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" />
-                                            <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0" />
+                                            <Label Text="Observaciones:" FontAttributes="Bold" />
                                             <Label Text="{Binding Observaciones}" FontAttributes="Italic" TextColor="Gray" />
                                         </StackLayout>
                                     </Frame>
@@ -73,22 +93,19 @@
                         </CollectionView>
                     </StackLayout>
                     <!-- Operaciones -->
-                    <StackLayout x:Name="OperacionesLayout">
+                    <StackLayout x:Name="OperacionesLayout" IsVisible="False">
                         <CollectionView x:Name="ListaOperaciones">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame CornerRadius="15" BorderColor="Black" Padding="15" Margin="10">
                                         <StackLayout Spacing="10">
-                                            <Label Text="{Binding Fecha, StringFormat='Operación - {0:dd/MM/yyyy}'}"
-                                                   FontAttributes="Bold"
-                                                   FontSize="18"
-                                                   HorizontalOptions="Center" />
+                                            <Label Text="{Binding Fecha, StringFormat='Operación - {0:dd/MM/yyyy}'}" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
                                             <Label Text="{Binding Tipo, StringFormat='Tipo: {0}'}" />
                                             <Label Text="{Binding Cirujano, StringFormat='Cirujano: {0}'}" />
                                             <Label Text="{Binding Hora, StringFormat='Hora: {0}'}" />
                                             <Label Text="{Binding Quirofano, StringFormat='Quirófano: {0}'}" />
                                             <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" />
-                                            <Label Text="Observaciones:" FontAttributes="Bold" Margin="0,10,0,0" />
+                                            <Label Text="Observaciones:" FontAttributes="Bold" />
                                             <Label Text="{Binding Observaciones}" FontAttributes="Italic" TextColor="Gray" />
                                         </StackLayout>
                                     </Frame>
@@ -96,12 +113,12 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
-
+                    
                 </StackLayout>
             </ScrollView>
         </Grid>
 
-        <!-- Botón  -->
+        <!-- Botón flotante -->
         <Button Text="＋"
                 AbsoluteLayout.LayoutBounds="1,1,60,60"
                 AbsoluteLayout.LayoutFlags="PositionProportional"

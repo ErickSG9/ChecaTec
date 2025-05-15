@@ -146,16 +146,27 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Operacion>().Where(o => o.IdUsuario == idPaciente).ToList();
         }
+        public static List<Receta> ObtenerRecetasPorPaciente(int idPaciente)
+        {
+            var db = GetConnection();
+            return db.Table<Receta>()
+                     .Where(r => r.IdPaciente == idPaciente)
+                     .ToList();
+        }
         public static void InsertarOperacion(Operacion operacion)
         {
             var db = GetConnection();
-            db.CreateTable<Operacion>(); // Asegura que la tabla exista
             db.Insert(operacion);
         }
         public static void InsertarConsulta(Consulta consulta)
         {
             var db = GetConnection();
             db.Insert(consulta);
+        }
+        public static void InsertarReceta(Receta receta) 
+        { 
+            var db = GetConnection();
+            db.Insert(receta);
         }
         public static List<Consulta> ObtenerConsultasPorPaciente(int idPaciente)
         {

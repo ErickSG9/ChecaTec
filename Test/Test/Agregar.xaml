@@ -21,7 +21,6 @@
             <StackLayout x:Name="ConsultaLayout" IsVisible="False" Spacing="10">
                 <Label Text="Motivo de la Consulta"/>
                 <Entry x:Name="motivoEntry" Placeholder="Motivo" />
-
                 <Label Text="Estado"/>
                 <Picker x:Name="estadoCPicker">
                     <Picker.Items>
@@ -30,17 +29,17 @@
                         <x:String>Finalizada</x:String>
                     </Picker.Items>
                 </Picker>
-                <Entry x:Name="presionEntry" Placeholder="Precion arteral" />
+                <Entry x:Name="presionEntry" Placeholder="Preción arterial" />
                 <Entry x:Name="frecuenciaEntry" Keyboard="Numeric" Placeholder="Frecuencia cardiaca" />
                 <Entry x:Name="temperaturaEntry" Keyboard="Numeric" Placeholder="Temperatura" />
                 <Label Text="Observaciones"/>
                 <Editor x:Name="observacionesCEditor" HeightRequest="80" />
                 <Button Text="Guardar" Clicked="OnGuardarCClicked" BackgroundColor="#2196F3" TextColor="White"/>
             </StackLayout>
+
             <!-- Sección para OPERACION -->
             <StackLayout x:Name="OperacionLayout" IsVisible="False" Padding="20" Spacing="15">
-                <Label Text="Registrar Nueva Operación" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
-
+                <Label Text="Registrar Operación" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
                 <Entry x:Name="tipoEntry" Placeholder="Tipo de operación" />
                 <Entry x:Name="cirujanoEntry" Placeholder="Nombre del cirujano" />
                 <TimePicker x:Name="horaPicker" />
@@ -54,6 +53,20 @@
                 </Picker>
                 <Editor x:Name="observacionesOEditor" Placeholder="Observaciones..." HeightRequest="100" />
                 <Button Text="Guardar" Clicked="OnGuardarOClicked" BackgroundColor="#2196F3" TextColor="White"/>
+            </StackLayout>
+
+            <!-- Sección para RECETA -->
+            <StackLayout x:Name="RecetaLayout" IsVisible="False" Padding="20" Spacing="15">
+                <Label Text="Registrar Receta" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+                <StackLayout x:Name="MedicamentosLayout" Spacing="15">
+                    <!-- Se agregarán dinámicamente los grupos de entradas aquí -->
+                </StackLayout>
+
+                <Button Text="Agregar otro medicamento" Clicked="OnAgregarMedicamentoClicked" />
+
+                <Entry x:Name="NotaEntry" Placeholder="Nota general (opcional)" />
+                <Button Text="Guardar" Clicked="OnGuardarRClicked" BackgroundColor="#2196F3" TextColor="White"/>
             </StackLayout>
 
         </StackLayout>

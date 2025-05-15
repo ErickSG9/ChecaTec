@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using System;
+using SQLite;
 
 namespace Test.Models
 {
@@ -9,18 +10,19 @@ namespace Test.Models
         public int IdReceta { get; set; }
         public int IdPaciente { get; set; } // Relación con Pacientes
         public int IdProfesional { get; set; } // Relación con Usuarios (Médico)
-        public string FechaEmision { get; set; }
+        public DateTime FechaEmision { get; set; }
         public string Medicamento { get; set; }
         public string Dosis { get; set; }
         public string Instrucciones { get; set; }
-        public bool Activa { get; set; } // 1: Activa, 0: Inactiva
+        public string Nota { get; set; }
+        public bool Activa { get; set; } 
 
         // Claves foráneas (solo para referencia en código, no en SQLite)
         [Ignore]
         public Pacientes Paciente { get; set; }
 
         [Ignore]
-        public Usuario Profesional { get; set; }
+        public string Profesional { get; set; }
     }
 }
     

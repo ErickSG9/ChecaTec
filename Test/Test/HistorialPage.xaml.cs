@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Test.Data;
-using Test.Models;
 using Xamarin.Forms;
 
 namespace Test
@@ -33,15 +32,26 @@ namespace Test
                 consulta.NombreDoctor = doctor?.Nombre ?? "Desconocido";
             }
 
-            var operaciones = Database.ObtenerOperacionesPorPaciente(idUsuario);
-
+            var operaciones = Database.ObtenerOperacionesPorPaciente(idUsuario)
+                .OrderByDescending(c => c.Fecha)
+                .ToList();
+            var recetas = Database.ObtenerRecetasPorPaciente(idUsuario)
+                .Where(r => r.Activa == false)
+                .OrderByDescending(c => c.FechaEmision)
+                .ToList(); 
+            foreach (var receta in recetas)
+            {
+                var doctor = Database.GetUsuarioPorId(receta.IdProfesional);
+                receta.Profesional = doctor?.Nombre ?? "Desconocido";
+            }
+            ListaRecetas.ItemsSource = recetas;
             ListaConsultas.ItemsSource = consultas;
             ListaOperaciones.ItemsSource = operaciones;
 
-            // Mostrar ambos por defecto
-            MostrarConsultas(true);
-            MostrarOperaciones(true);
-            FiltroHistorial.SelectedIndex = 2; // Ambos
+            MostrarConsultas(false);
+            MostrarOperaciones(false); 
+            MostrarRecetas(true);
+            FiltroHistorial.SelectedItem = 2;
         }
 
         private void FiltroHistorial_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,10 +63,17 @@ namespace Test
                 case "Consultas":
                     MostrarConsultas(true);
                     MostrarOperaciones(false);
+                    MostrarRecetas(false);
                     break;
                 case "Operaciones":
                     MostrarConsultas(false);
                     MostrarOperaciones(true);
+                    MostrarRecetas(false);
+                    break;
+                case "Recetas":
+                    MostrarConsultas(false);
+                    MostrarOperaciones(false);
+                    MostrarRecetas(true);
                     break;
             }
         }
@@ -70,8 +87,12 @@ namespace Test
         {
             OperacionesLayout.IsVisible = visible;
         }
+        private void MostrarRecetas(bool visible)
+        {
+            RecetasLayout.IsVisible = visible;
+        }
 
-        private async void OnEstadisticasClicked(object sender, EventArgs e)
+        private async void OnPerfilClicked(object sender, EventArgs e)
         {
             var receptor = Database.GetUsuarioPorId(receptorId);
             var paciente = Database.GetPacientePorId(receptor.IdUsuario);

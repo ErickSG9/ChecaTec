@@ -29,6 +29,7 @@ namespace Test
             // Obtener datos de Usuario y Paciente
             var usuario = Database.GetUsuarioPorId(_idUsuario);
             var paciente = Database.GetPacientePorId(_idPaciente);
+            await DisplayAlert("DEBUG", $"Usuario: {usuario?.IdUsuario} / Paciente: {paciente?.Genero}", "OK");
 
             if (usuario != null && paciente != null)
             {

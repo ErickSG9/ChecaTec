@@ -2,54 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.RecetaPage"
-             Title="Receta Médica"
+             Title="Recetas"
              BackgroundColor="White">
 
     <ScrollView>
-        <StackLayout Padding="20" Spacing="15">
-
-            <!-- Encabezado de la receta -->
-            <Label Text="RECETA MÉDICA"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
-
-            <Label Text="Dr. Juan Ramírez" FontSize="18" />
-            <Label Text="Fecha: 15/03/2025" FontSize="14" TextColor="Gray" />
-
-            <!-- Lista de medicamentos -->
-            <Frame BorderColor="Black" CornerRadius="15" Padding="15">
-                <StackLayout Spacing="10">
-
-                    <!-- Medicamento 1 -->
-                    <StackLayout>
-                        <Label Text="• Paracetamol" FontAttributes="Bold"/>
-                        <Label Text="Dosis: 500 mg"/>
-                        <Label Text="Frecuencia: Cada 8 horas por 5 días"/>
-                    </StackLayout>
-
-                    <!-- Medicamento 2 -->
-                    <StackLayout>
-                        <Label Text="• Amoxicilina" FontAttributes="Bold"/>
-                        <Label Text="Dosis: 250 mg"/>
-                        <Label Text="Frecuencia: Cada 12 horas por 7 días"/>
-                    </StackLayout>
-
-                    <!-- Medicamento 3 -->
-                    <StackLayout>
-                        <Label Text="• Ibuprofeno" FontAttributes="Bold"/>
-                        <Label Text="Dosis: 400 mg"/>
-                        <Label Text="Frecuencia: Solo si hay dolor, cada 8 horas"/>
-                    </StackLayout>
-
-                </StackLayout>
-            </Frame>
-
-            <!-- Firma o aclaraciones -->
-            <Label Text="* Tomar los medicamentos después de alimentos"
-                   FontSize="12"
-                   TextColor="Gray"
-                   HorizontalOptions="Center"/>
+        <StackLayout Padding="15">
+            <CollectionView x:Name="ListaRecetas">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Black" CornerRadius="10" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="{Binding FechaEmision, StringFormat='Receta - {0:dd/MM/yyyy}'}" 
+                                       FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
+                                <Label Text="{Binding NombreDoctor, StringFormat='Prescrita por: {0}'}" />
+                                <Label Text="{Binding Medicamento, StringFormat='Medicamento: {0}'}"/>
+                                <Label Text="{Binding Dosis, StringFormat='Dosis: {0}'}"/>
+                                <Label Text="{Binding Instrucciones, StringFormat='Instrucciones: {0}'}"/>
+                                <Label Text="{Binding Nota, StringFormat='Notas: {0}'}"/>
+                                <Button Text="Finalizar receta"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            Clicked="OnDesactivarRecetaClicked"
+                            CommandParameter="{Binding}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ScrollView>
 </ContentPage>

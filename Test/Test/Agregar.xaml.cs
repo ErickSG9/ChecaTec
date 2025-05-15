@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
+using Xamarin.Forms;
 using Test.Data;
 using Test.Models;
-using Xamarin.Forms;
 
 namespace Test
 {
@@ -13,26 +14,28 @@ namespace Test
         {
             InitializeComponent();
             receptorId = idReceptor;
+            Generar.SelectedIndexChanged += Generar_SelectedIndexChanged;
+            CrearBloqueMedicamento(); // Crea al menos uno al inicio
         }
+
         private void Generar_SelectedIndexChanged(object sender, EventArgs e)
         {
             string seleccion = Generar.SelectedItem as string;
 
-            // Ocultar todo primero
-            ConsultaLayout.IsVisible = false; 
+            ConsultaLayout.IsVisible = false;
             OperacionLayout.IsVisible = false;
+            RecetaLayout.IsVisible = false;
 
             if (seleccion == "Consulta")
-            {
                 ConsultaLayout.IsVisible = true;
-            }
-            if (seleccion == "Operacion")
-            {
-                OperacionLayout.IsVisible = true;
-            }
 
-            // Aquí podrías agregar más casos para Receta y Operación si lo deseas
+            if (seleccion == "Operacion")
+                OperacionLayout.IsVisible = true;
+
+            if (seleccion == "Receta")
+                RecetaLayout.IsVisible = true;
         }
+
         private async void OnGuardarCClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(motivoEntry.Text) || estadoCPicker.SelectedIndex == -1)
@@ -44,7 +47,7 @@ namespace Test
             var nuevaConsulta = new Consulta
             {
                 Fecha = DateTime.Today,
-                Hora = DateTime.Now.ToString("hh:mm tt"), 
+                Hora = DateTime.Now.ToString("hh:mm tt"),
                 Motivo = motivoEntry.Text,
                 Estado = estadoCPicker.SelectedItem.ToString(),
                 PresionArterial = presionEntry.Text,
@@ -52,7 +55,7 @@ namespace Test
                 Temperatura = double.TryParse(temperaturaEntry.Text, out double temp) ? temp : 0.0,
                 Observaciones = observacionesCEditor.Text,
                 IdUsuario = receptorId,
-                IdDoctor = App.UsuarioActual.IdUsuario 
+                IdDoctor = App.UsuarioActual.IdUsuario
             };
 
             try
@@ -66,6 +69,7 @@ namespace Test
                 await DisplayAlert("Error", $"No se pudo guardar la consulta.\n{ex.Message}", "OK");
             }
         }
+
         private async void OnGuardarOClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tipoEntry.Text) ||
@@ -93,11 +97,82 @@ namespace Test
             {
                 Database.InsertarOperacion(nuevaOperacion);
                 await DisplayAlert("Éxito", "Operación registrada correctamente.", "OK");
-                await Navigation.PopAsync(); // Regresar
+                await Navigation.PopAsync();
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"No se pudo guardar la operación.\n{ex.Message}", "OK");
+            }
+        }
+
+        private void CrearBloqueMedicamento()
+        {
+            var stack = new StackLayout { Spacing = 5 };
+
+            stack.Children.Add(new Entry { Placeholder = "Medicamento" });
+            stack.Children.Add(new Entry { Placeholder = "Dosis" });
+            stack.Children.Add(new Entry { Placeholder = "Instrucciones" });
+
+            MedicamentosLayout.Children.Add(stack);
+        }
+
+        private void OnAgregarMedicamentoClicked(object sender, EventArgs e)
+        {
+            CrearBloqueMedicamento();
+        }
+
+        private async void OnGuardarRClicked(object sender, EventArgs e)
+        {
+            var bloques = MedicamentosLayout.Children.OfType<StackLayout>().ToList();
+
+            if (bloques.Count == 0)
+            {
+                await DisplayAlert("Error", "Debe ingresar al menos un medicamento.", "OK");
+                return;
+            }
+
+            var recetasFinal = bloques.Select(b =>
+            {
+                var entradas = b.Children.OfType<Entry>().ToList();
+                return new
+                {
+                    Medicamento = entradas[0].Text?.Trim(),
+                    Dosis = entradas[1].Text?.Trim(),
+                    Instrucciones = entradas[2].Text?.Trim()
+                };
+            }).Where(x => !string.IsNullOrWhiteSpace(x.Medicamento)).ToList();
+
+            if (recetasFinal.Count == 0)
+            {
+                await DisplayAlert("Error", "Debe ingresar al menos un medicamento con información.", "OK");
+                return;
+            }
+
+            string medicamentos = string.Join(" | ", recetasFinal.Select(x => x.Medicamento));
+            string dosis = string.Join(" | ", recetasFinal.Select(x => x.Dosis));
+            string instrucciones = string.Join(" | ", recetasFinal.Select(x => x.Instrucciones));
+
+            var receta = new Receta
+            {
+                IdPaciente = receptorId,
+                IdProfesional = App.UsuarioActual.IdUsuario,
+                Medicamento = medicamentos,
+                Dosis = dosis,
+                Instrucciones = instrucciones,
+                Nota = NotaEntry.Text,
+                FechaEmision = DateTime.Today,
+                Activa = true
+            };
+
+            try
+            {
+                Database.InsertarReceta(receta);
+                await DisplayAlert("Éxito", "Receta registrada correctamente.", "OK");
+                await Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"No se pudo guardar la receta.\n{ex.Message}", "OK");
             }
         }
     }

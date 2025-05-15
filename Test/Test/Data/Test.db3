@@ -37,6 +37,7 @@ CREATE TABLE Recetas (
     Medicamento TEXT NOT NULL,
     Dosis TEXT NOT NULL,
     Instrucciones TEXT,
+    Nota TEXT,
     Activa BOOLEAN DEFAULT 1, -- 1: Activa, 0: Inactiva
     FOREIGN KEY (IdPaciente) REFERENCES Pacientes(IdPaciente) ON DELETE CASCADE,
     FOREIGN KEY (IdProfesional) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
