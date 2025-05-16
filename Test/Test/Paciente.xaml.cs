@@ -54,9 +54,9 @@ namespace Test
                     Vacunas = paciente.Vacunas,
                     Discapacidad = paciente.Discapacidad,
 
-                    NombreE = usuario.NombreE,
-                    ParentescoE = usuario.ParentescoE,
-                    TelefonoE = usuario.TelefonoE
+                    NombreE = paciente.NombreE,
+                    ParentescoE = paciente.ParentescoE,
+                    TelefonoE = paciente.TelefonoE
                 };
 
                 BindingContext = vm;

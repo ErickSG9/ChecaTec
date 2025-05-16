@@ -120,7 +120,7 @@
 
         <!-- Botón flotante -->
         <Button x:Name="BotonAgregar"
-                Text="＋"
+                 Text="＋"
                 AbsoluteLayout.LayoutBounds="1,1,60,60"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 BackgroundColor="#007AFF"

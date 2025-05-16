@@ -23,23 +23,23 @@ namespace Test
         {
             try
             {
-                // Obtener valores
+                // Datos comunes
                 string nombre = entryNombre.Text;
                 string apellidos = entryApellidos.Text;
                 string email = entryEmail.Text;
                 string contrasena = entryContrasena.Text;
                 string rol = pickerRol.SelectedItem?.ToString();
-
+                string especialidad = "";
                 string genero = null;
                 double peso = 0, altura = 0;
                 string alergias = "", antecedentes = "", medicamentos = "", vacunas = "", discapacidad = "";
                 DateTime fechaNacimiento = fechaNacimientoPicker.Date;
                 string numeroSeguro = entryNumeroSeguro.Text;
+                string clinica = "", horario = "", generoM = "";
 
-                // Validaciones
-                if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(email) ||
-                    string.IsNullOrEmpty(contrasena) || string.IsNullOrEmpty(rol) ||
-                    string.IsNullOrEmpty(apellidos))
+                if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(email) ||
+                    string.IsNullOrWhiteSpace(contrasena) || string.IsNullOrWhiteSpace(rol) ||
+                    string.IsNullOrWhiteSpace(apellidos))
                 {
                     await DisplayAlert("Error", "Todos los campos obligatorios deben estar llenos.", "OK");
                     return;
@@ -62,6 +62,13 @@ namespace Test
                 string parE = entryParE.Text;
                 string telEmergencia = entryTelE.Text;
 
+                if (!string.IsNullOrWhiteSpace(telEmergencia) && !long.TryParse(telEmergencia, out _))
+                {
+                    await DisplayAlert("Error", "Teléfono de emergencia inválido", "OK");
+                    return;
+                }
+
+                // Datos específicos por rol
                 if (rol == "Paciente")
                 {
                     genero = pickerGenero.SelectedItem?.ToString();
@@ -72,18 +79,25 @@ namespace Test
                     medicamentos = editorMedicamentos.Text;
                     vacunas = editorVacunas.Text;
                     discapacidad = editorDiscapacidad.Text;
+                }
+                else if (rol == "Médico")
+                {
+                    especialidad = entryEspecialidad.Text?.Trim();
+                    horario = entryHorario.Text?.Trim();
+                    clinica = entryClinica.Text?.Trim();
+                    generoM = pickerGeneroMedico.SelectedItem?.ToString();
 
-                    if (!string.IsNullOrWhiteSpace(telEmergencia) && !long.TryParse(telEmergencia, out _))
+                    if (string.IsNullOrWhiteSpace(especialidad))
                     {
-                        await DisplayAlert("Error", "Teléfono de emergencia inválido", "OK");
+                        await DisplayAlert("Error", "Ingrese una especialidad para el médico.", "OK");
                         return;
                     }
                 }
 
-                // 1. Registrar el usuario
-                Database.RegistrarUsuario(nombre, apellidos, edad, telefono.ToString(), email, contrasena, rol, nomE, parE, telEmergencia);
+                // Registrar usuario
+                Database.RegistrarUsuario(nombre, apellidos, edad, telefono.ToString(), email, contrasena, rol);
 
-                // 2. Obtener el ID del usuario recién creado
+                // Obtener ID del nuevo usuario
                 var usuario = Database.GetUsuarioPorId(
                     Database.GetConnection().Table<Usuario>()
                     .Where(u => u.Email == email)
@@ -91,7 +105,7 @@ namespace Test
                     .First().IdUsuario
                 );
 
-                // 3. Si es paciente, registrar datos clínicos
+                // Registrar paciente
                 if (rol == "Paciente")
                 {
                     Database.RegistrarPaciente(
@@ -105,7 +119,19 @@ namespace Test
                         antecedentes,
                         medicamentos,
                         vacunas,
-                        discapacidad
+                        discapacidad, nomE, parE, telEmergencia
+                    );
+                }
+
+                // Registrar médico
+                if (rol == "Médico")
+                {
+                    Database.RegistrarMedico(
+                        usuario.IdUsuario,
+                        especialidad,
+                        horario,
+                        clinica,
+                        generoM
                     );
                 }
 
@@ -123,6 +149,7 @@ namespace Test
             var rolSeleccionado = pickerRol.SelectedItem?.ToString();
             pacienteLayout.IsVisible = rolSeleccionado == "Paciente";
             emergenciaLayout.IsVisible = rolSeleccionado == "Paciente";
+            medicoLayout.IsVisible = rolSeleccionado == "Médico";
         }
     }
 }

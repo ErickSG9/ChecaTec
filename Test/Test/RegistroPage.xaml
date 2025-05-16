@@ -38,8 +38,28 @@
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
-                <StackLayout x:Name="pacienteLayout" IsVisible="False">
+                <!-- Layout para médicos -->
+                <StackLayout x:Name="medicoLayout" IsVisible="False" Spacing="10">
+                    <Label Text="Especialidad" TextColor="Black"/>
+                    <Entry x:Name="entryEspecialidad" Placeholder="Ej. Pediatría, Ginecología" TextColor="Black" BackgroundColor="#f0f0f0"/>
 
+                    <Label Text="Horario de atención" TextColor="Black"/>
+                    <Entry x:Name="entryHorario" Placeholder="Ej. Lunes a Viernes, 9am - 5pm" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Clínica" TextColor="Black"/>
+                    <Entry x:Name="entryClinica" Placeholder="Nombre o dirección de la clínica" TextColor="Black" BackgroundColor="#f0f0f0"/>
+
+                    <Label Text="Género del médico" TextColor="Black"/>
+                    <Picker x:Name="pickerGeneroMedico" Title="Seleccione género">
+                        <Picker.Items>
+                            <x:String>Masculino</x:String>
+                            <x:String>Femenino</x:String>
+                            <x:String>Otro</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </StackLayout>
+
+                <StackLayout x:Name="pacienteLayout" IsVisible="False">
                     <Label Text="Género" TextColor="Black"/>
                     <Picker x:Name="pickerGenero">
                         <Picker.ItemsSource>

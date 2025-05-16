@@ -5,29 +5,22 @@
              Title="Personal Médico"
              BackgroundColor="White">
 
-    <StackLayout Padding="20" Spacing="15">
-        <Label Text="Equipo Médico"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"/>
-
-        <CollectionView x:Name="DoctoresList">
+    <StackLayout Padding="15">
+        <CollectionView x:Name="ListaMedicos">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
-                        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                            <!-- Imagen -->
-                            <Image Source="{Binding Foto}" WidthRequest="60" HeightRequest="60" Margin="5"/>
+                        <StackLayout Spacing="5">
+                            <Label Text="{Binding NombreCompleto}" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding Especialidad, StringFormat='Especialidad: {0}'}" />
 
-                            <!-- Info -->
-                            <StackLayout Grid.Column="1" Spacing="2" Padding="5">
-                                <Label Text="{Binding Nombre}" FontSize="16" FontAttributes="Bold"/>
-                                <Label Text="{Binding Especialidad}" FontSize="14" TextColor="Gray"/>
-                            </StackLayout>
-
-                            <!-- Botón -->
-                            <Button Grid.Column="2" Text="Ver" Clicked="VerDoctor_Clicked"/>
-                        </Grid>
+                            <Button Text="Ver Detalles"
+                                    Clicked="OnVerDetallesClicked"
+                                    BackgroundColor="#007ACC"
+                                    TextColor="White"
+                                    CornerRadius="5"
+                                    Padding="5"/>
+                        </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

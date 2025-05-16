@@ -95,3 +95,12 @@ CREATE TABLE Operacion (
     Observaciones TEXT,
     FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
 );
+CREATE TABLE Medicos (
+    IdMedico INTEGER PRIMARY KEY AUTOINCREMENT,
+    IdUsuario INTEGER NOT NULL,
+    Especialidad TEXT NOT NULL,
+    HorarioAtencion TEXT,
+    Clinica TEXT,
+    Genero TEXT,
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE
+);

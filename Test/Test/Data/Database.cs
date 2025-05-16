@@ -13,6 +13,7 @@ namespace Test.Data
             var db = GetConnection(); 
             db.CreateTable<Usuario>();
             db.CreateTable<Pacientes>();
+            db.CreateTable<Medico>();
             db.CreateTable<Receta>();
             db.CreateTable<HistorialClinico>();
             db.CreateTable<Chat>(); 
@@ -31,7 +32,7 @@ namespace Test.Data
             return _database;
         }
 
-        public static void RegistrarUsuario(string nombre, string apellidos, int edad, string telefono, string email, string contrasena, string rol, string nomE, string parE, string telE)
+        public static void RegistrarUsuario(string nombre, string apellidos, int edad, string telefono, string email, string contrasena, string rol)
         {
             var db = GetConnection();
 
@@ -52,9 +53,6 @@ namespace Test.Data
                 Email = email,
                 Contrasena = contrasena, 
                 Rol = rol,
-                NombreE = nomE,
-                ParentescoE = parE,
-                TelefonoE = telE,
                 FechaRegistro = DateTime.Now
             };
 
@@ -64,6 +62,26 @@ namespace Test.Data
         {
             var db = GetConnection();
             return db.Table<Usuario>().FirstOrDefault(u => u.Email == email && u.Contrasena == contrasena);
+        }
+        public static void RegistrarMedico(int idUsuario, string especialidad, string horario, string clinica, string genero)
+        {
+            var db = GetConnection();
+
+            var nuevoMedico = new Medico
+            {
+                IdUsuario = idUsuario,
+                Especialidad = especialidad,
+                HorarioAtencion = horario,
+                Clinica = clinica,
+                Genero = genero
+            };
+
+            db.Insert(nuevoMedico);
+        }
+        public static Medico GetMedicoPorUsuarioId(int idUsuario)
+        {
+            var db = GetConnection();
+            return db.Table<Medico>().FirstOrDefault(m => m.IdUsuario == idUsuario);
         }
         public static void EnviarMensaje(int idEmisor, int idReceptor, string mensaje)
         {
@@ -173,7 +191,7 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Consulta>().Where(c => c.IdUsuario == idPaciente).ToList();
         }
-        public static void RegistrarPaciente(int idUsuario,DateTime fechaNacimiento,string numeroSeguro,string genero,double peso,double altura,string alergias,string antecedentes,string medicamentos,string vacunas,string discapacidad)
+        public static void RegistrarPaciente(int idUsuario,DateTime fechaNacimiento,string numeroSeguro,string genero,double peso,double altura,string alergias,string antecedentes,string medicamentos,string vacunas,string discapacidad, string nomE, string parE, string telE)
         {
             var db = GetConnection();
 
@@ -189,7 +207,10 @@ namespace Test.Data
                 AntecedentesClinicos = antecedentes,
                 Medicamentos = medicamentos,
                 Vacunas = vacunas,
-                Discapacidad = discapacidad
+                Discapacidad = discapacidad,
+                NombreE = nomE,
+                ParentescoE = parE,
+                TelefonoE = telE,
             };
 
             db.Insert(nuevoPaciente);

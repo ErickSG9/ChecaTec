@@ -19,6 +19,9 @@ namespace Test.Models
         public string Medicamentos { get; set; }
         public string Vacunas { get; set; }
         public string Discapacidad { get; set; }
+        public string NombreE { get; set; }
+        public string ParentescoE { get; set; }
+        public string TelefonoE { get; set; }
         [Ignore]
         public Usuario Usuario { get; set; }
     }

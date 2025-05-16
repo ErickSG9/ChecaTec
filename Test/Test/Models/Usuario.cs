@@ -15,9 +15,7 @@ namespace Test.Models
         public string Email { get; set; }
         public string Contrasena { get; set; }
         public string Rol { get; set; }
-        public string NombreE { get; set; }
-        public string ParentescoE{ get; set; }
-        public string TelefonoE { get; set; }
+        public string Especialidad { get; set; }
         public DateTime FechaRegistro { get; set; }
     }
 }
