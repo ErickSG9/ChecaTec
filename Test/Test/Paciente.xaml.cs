@@ -65,7 +65,7 @@ namespace Test
 
         private async void OnHistorialClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new HistorialPage(App.UsuarioActual.IdUsuario));
+            await Navigation.PopAsync();
         }
     }
 }
