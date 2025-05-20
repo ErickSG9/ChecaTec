@@ -8,9 +8,17 @@ namespace Test.Data
 {
     public static class Database
     {
+        public static string rutaBD = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "Test.db3"
+        );
+
         public static void InitializeDatabase()
         {
+            
             var db = GetConnection();
+            
+            
             db.CreateTable<Usuario>();
             db.CreateTable<Pacientes>();
             db.CreateTable<Medico>();
@@ -49,8 +57,7 @@ namespace Test.Data
                 Nombre = nombre,
                 Apellidos = apellidos,
                 Edad = edad,
-                Telefono = telefono,
-                Genero = genero,
+                Telefono = telefono,    
                 Email = email,
                 Contrasena = contrasena, 
                 Rol = rol,
@@ -64,7 +71,7 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Usuario>().FirstOrDefault(u => u.Email == email && u.Contrasena == contrasena);
         }
-        public static void RegistrarMedico(int idUsuario, string especialidad, string horario, string clinica)
+        public static void RegistrarMedico(int idUsuario, string especialidad, string horario, string clinica )
         {
             var db = GetConnection();
 
@@ -73,7 +80,8 @@ namespace Test.Data
                 IdUsuario = idUsuario,
                 Especialidad = especialidad,
                 HorarioAtencion = horario,
-                Clinica = clinica,
+                Clinica = clinica
+                
             };
 
             db.Insert(nuevoMedico);
@@ -131,10 +139,14 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Usuario>().Where(u => u.Rol == rol).ToList();
         }
-        public static List<Chat> GetChatsPorUsuario(int usuarioId)
+        public static List<Chat> GetChatsPorUsuario(int idUsuario)
         {
-            var db = GetConnection();
-            return db.Table<Chat>().Where(c => c.IdEmisor == usuarioId || c.IdReceptor == usuarioId).ToList();
+            using (var conn = new SQLiteConnection(rutaBD))
+            {
+                return conn.Table<Chat>()
+                    .Where(c => c.IdEmisor == idUsuario || c.IdReceptor == idUsuario)
+                    .ToList() ?? new List<Chat>();
+            }
         }
         public static void GuardarMensaje(int idEmisor, int idReceptor, string mensaje, bool leido)
         {
@@ -199,7 +211,7 @@ namespace Test.Data
             {
                 IdUsuario = idUsuario,
                 FechaNacimiento = fechaNacimiento,
-                NumeroSeguro = numeroSeguro,
+                NumeroSeguro = numeroSeguro,                
                 Peso = peso,
                 Altura = altura,
                 Alergias = alergias,

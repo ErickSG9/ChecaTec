@@ -48,7 +48,7 @@ namespace Test
                     IdReceptor = otroUsuario.IdUsuario,
                     Nombre = otroUsuario.Nombre,
                     UltimoMensaje = ultimoMensaje?.Mensaje ?? "",
-                    Hora = ultimoMensaje?.FechaEnvio.ToString("HH:mm"),
+                    FechaHora = ultimoMensaje?.FechaEnvio ?? DateTime.MinValue,
                     Foto = "perfil.png"
                 });
             }

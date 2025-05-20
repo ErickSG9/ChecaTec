@@ -68,7 +68,7 @@
             </CollectionView>
 
             <!-- Botón para nueva conversación -->
-            <Button Text="Nuevo"
+            <Button Text="Nuevo"                    
                     BackgroundColor="#007AFF"
                     TextColor="White"
                     CornerRadius="15"
