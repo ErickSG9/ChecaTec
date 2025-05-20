@@ -6,28 +6,31 @@
              Title="Chat"
              BackgroundColor="#eff6ff">
 
-    <AbsoluteLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ChatAlignmentConverter x:Key="ChatAlignmentConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <!-- Fondo de logo -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Expediente"
+            Order="Primary"
+            Priority="0"
+            Clicked="Expediente_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
         <Image Source="logoa.png"
                Aspect="AspectFill"
                Opacity="0.08"
                AbsoluteLayout.LayoutBounds="0,0,1,1"
                AbsoluteLayout.LayoutFlags="All" />
 
-        <!-- Contenido del chat -->
         <StackLayout Padding="15" Spacing="10"
                      AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All">
 
-            <!-- Título del chat -->
-            <Label x:Name="TituloChat"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="Black" />
-
-            <!-- Lista de mensajes -->
             <ListView x:Name="MensajesListView"
                       HasUnevenRows="True"
                       SeparatorVisibility="None"
@@ -35,38 +38,32 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame CornerRadius="10"
-                                   BackgroundColor="White"
-                                   BorderColor="#ccc"
-                                   Padding="10"
-                                   Margin="5">
-                                <StackLayout>
-                                    <Label Text="{Binding Mensaje}"
-                                           FontSize="16"
-                                           TextColor="Black" />
-                                    <Label Text="{Binding FechaEnvio}"
-                                           FontSize="12"
-                                           TextColor="Gray" />
-                                </StackLayout>
-                            </Frame>
+                            <StackLayout Padding="5"
+                                         HorizontalOptions="{Binding ., Converter={StaticResource ChatAlignmentConverter}}">
+                                <Frame CornerRadius="10"
+                                       BackgroundColor="White"
+                                       BorderColor="#ccc"
+                                       Padding="10"
+                                       HasShadow="False"
+                                       Margin="5">
+                                    <StackLayout>
+                                        <Label Text="{Binding Mensaje}" FontSize="16" TextColor="Black" />
+                                        <Label Text="{Binding FechaEnvio, StringFormat='{0:HH:mm}'}" FontSize="12" TextColor="Gray" />
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!-- Caja de entrada -->
-            <Grid Padding="5"
-                  ColumnDefinitions="*,Auto"
-                  VerticalOptions="End">
-                <Frame CornerRadius="15"
-                       BorderColor="Black"
-                       Padding="5"
-                       HasShadow="False"
-                       BackgroundColor="White">
+            <Grid Padding="5" ColumnDefinitions="*,Auto" VerticalOptions="End">
+                <Frame CornerRadius="15" BorderColor="Black" Padding="5" HasShadow="False" BackgroundColor="White">
                     <Entry x:Name="MensajeEntry"
                            Placeholder="Escribe tu mensaje..."
                            BackgroundColor="Transparent"
-                           TextColor="Black" />
+                           TextColor="Black"
+                           HeightRequest="50"/>
                 </Frame>
                 <Button Grid.Column="1"
                         Text="Enviar"
