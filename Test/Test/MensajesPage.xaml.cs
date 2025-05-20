@@ -15,17 +15,23 @@ namespace Test
         public MensajesPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             CargarConversaciones();
         }
+
         private async void CerrarSesion_Clicked(object sender, EventArgs e)
         {
             bool respuesta = await DisplayAlert("Cerrar sesión", "¿Está seguro de que desea cerrar sesión?", "Sí", "Cancelar");
-
-            if (respuesta) 
+            if (respuesta)
             {
-                Application.Current.MainPage = new NavigationPage(new LoginPage()); 
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
         }
+
         private void CargarConversaciones()
         {
             var usuario = App.UsuarioActual;
@@ -33,6 +39,15 @@ namespace Test
                 return;
 
             var chats = Database.GetChatsPorUsuario(usuario.IdUsuario);
+
+            // Verifica que haya chats antes de procesar
+            if (chats == null || chats.Count == 0)
+            {
+                chatsOriginales = new List<ChatResumen>();
+                MensajesList.ItemsSource = chatsOriginales;
+                return;
+            }
+
             var usuariosConConversacion = chats
                 .Select(c => c.IdEmisor == usuario.IdUsuario ? c.IdReceptor : c.IdEmisor)
                 .Distinct()
@@ -56,10 +71,14 @@ namespace Test
                     IdReceptor = otroUsuario.IdUsuario,
                     Nombre = otroUsuario.Nombre,
                     UltimoMensaje = ultimoMensaje?.Mensaje ?? "",
-                    Hora = ultimoMensaje?.FechaEnvio.ToString("HH:mm"),
+                    FechaHora = ultimoMensaje?.FechaEnvio ?? DateTime.MinValue,
                     Foto = "perfil.png"
                 });
             }
+
+            chatsOriginales = chatsOriginales
+                .OrderByDescending(c => c.FechaHora)
+                .ToList();
 
             MensajesList.ItemsSource = chatsOriginales;
         }
@@ -68,22 +87,19 @@ namespace Test
         {
             string filtro = e.NewTextValue?.ToLower() ?? "";
 
-            // Si la búsqueda está vacía, mostramos todo
             if (string.IsNullOrWhiteSpace(filtro))
             {
                 MensajesList.ItemsSource = chatsOriginales;
                 return;
             }
 
-            // Buscar coincidencias flexibles
             var coincidencias = chatsOriginales.Where(c =>
-               // c.Nombre.ToLower().Contains(filtro) ||           // Contiene en cualquier parte
-                c.Nombre.ToLower().StartsWith(filtro)// ||         // Empieza con...
-               // (c.Nombre.ToLower().Split(' ').Any(p => p.StartsWith(filtro))) // Por partes del nombre
+                c.Nombre.ToLower().StartsWith(filtro)
             ).ToList();
 
             MensajesList.ItemsSource = coincidencias;
         }
+
         private void OnSearchButtonPressed(object sender, EventArgs e)
         {
             var searchBar = sender as SearchBar;
@@ -92,11 +108,12 @@ namespace Test
             var coincidencias = chatsOriginales.Where(c =>
                 c.Nombre.ToLower().Contains(filtro) ||
                 c.Nombre.ToLower().StartsWith(filtro) ||
-                (c.Nombre.ToLower().Split(' ').Any(p => p.StartsWith(filtro)))
+                c.Nombre.ToLower().Split(' ').Any(p => p.StartsWith(filtro))
             ).ToList();
 
             MensajesList.ItemsSource = coincidencias;
         }
+
         private async void IrASeleccionarPaciente_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SeleccionarPacientePage());
@@ -131,7 +148,6 @@ namespace Test
                 }
             }
         }
-
     }
 }
 
