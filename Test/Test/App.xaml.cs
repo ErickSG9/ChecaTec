@@ -1,7 +1,5 @@
-﻿using System;
-using Test.Views;
+﻿using Test.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using Test.Data;
 using Test.Models;
 

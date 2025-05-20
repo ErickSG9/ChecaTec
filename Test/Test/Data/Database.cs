@@ -10,7 +10,7 @@ namespace Test.Data
     {
         public static void InitializeDatabase()
         {
-            var db = GetConnection(); 
+            var db = GetConnection();
             db.CreateTable<Usuario>();
             db.CreateTable<Pacientes>();
             db.CreateTable<Medico>();

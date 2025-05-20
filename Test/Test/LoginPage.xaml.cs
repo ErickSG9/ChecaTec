@@ -10,7 +10,6 @@ namespace Test.Views
         {
             InitializeComponent();
         }
-
         private async void IniciarSesion_Clicked(object sender, System.EventArgs e)
         {
             string email = entryUsuario.Text;
@@ -28,13 +27,10 @@ namespace Test.Views
             {
                 App.UsuarioActual = usuario;
                 await DisplayAlert("Bienvenido", $"Acceso correcto, {usuario.Nombre}", "Continuar");
-
-                // Si es médico, ir a MainPage con acceso médico
                 if (usuario.Rol == "Médico")
                 {
                     Application.Current.MainPage = new NavigationPage(new MensajesPage());
                 }
-                // Si es paciente, ir a MainPage con acceso paciente
                 else if (usuario.Rol == "Paciente")
                 {
                     Application.Current.MainPage = new NavigationPage(new MainPageP());

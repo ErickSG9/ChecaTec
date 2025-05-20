@@ -3,52 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.MainPageP"
              Title="Bienvenido"
-             BackgroundColor="White">
+             BackgroundColor="#eff6ff">
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="logout.png"
-                 Text="Cerrar sesión"
-                 Order="Primary"
-                 Priority="0"
-                 Clicked="CerrarSesion_Clicked"/>
+        <ToolbarItem
+            Text="Cerrar sesión"
+            Order="Primary"
+            Priority="0"
+            Clicked="CerrarSesion_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid>
+        <!-- Fondo con logo -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand" />
 
-        <!-- ENCABEZADO AZUL -->
-        <Grid BackgroundColor="#2296f3" Padding="15" HeightRequest="80">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Image Source="logo.png" HeightRequest="40" VerticalOptions="Center"/>
-            <Image Source="perfil.png" HeightRequest="40" Grid.Column="1" VerticalOptions="Center"/>
-        </Grid>
+        <!-- Contenido principal -->
+        <Grid RowDefinitions="*,Auto,Auto">
 
-        <!-- FONDO + BOTONES -->
-        <Grid Grid.Row="1">
-            <!-- Fondo difuminado -->
-            <Image Source="fondo_medico.png"
-                   Aspect="AspectFill"
-                   Opacity="0.1"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"/>
+            <!-- Imagen centrada -->
+            <Image Source="paciente.png"
+                   Grid.Row="0"
+                   HeightRequest="250"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
 
             <!-- Botones -->
-            <StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+            <StackLayout Grid.Row="1" Padding="30" Spacing="20" VerticalOptions="Center">
                 <Button Text="MENSAJES" Clicked="OnMensajesClicked" Style="{StaticResource MenuButtonStyle}" />
-                <Button Text="EXPEDIENTE CLINICO" Clicked="OnHistorialClicked" Style="{StaticResource MenuButtonStyle}" />                
+                <Button Text="EXPEDIENTE CLINICO" Clicked="OnHistorialClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="RECETA MÉDICA" Clicked="OnRecetaClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="PERSONAL MÉDICO" Clicked="OnPersonalClicked" Style="{StaticResource MenuButtonStyle}" />
-                <!--<Button Text="DB" Clicked="OnDBClicked" Style="{StaticResource MenuButtonStyle}" /> -->
             </StackLayout>
-        </Grid>
 
-        <!-- AYUDA -->
-        <Label Grid.Row="2"
-               Text="? Ayuda"
-               FontSize="Small"
-               TextColor="Black"
-               HorizontalOptions="End"
-               Margin="10"/>
+            <!-- Ayuda -->
+            <Label Grid.Row="2"
+                   Text="? Ayuda"
+                   FontSize="Small"
+                   TextColor="Black"
+                   HorizontalOptions="End"
+                   Margin="10"/>
+        </Grid>
     </Grid>
 </ContentPage>

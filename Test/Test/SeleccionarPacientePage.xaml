@@ -2,17 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.SeleccionarPacientePage"
-             Title="Elegir Paciente">
+             Title="Elegir Paciente"
+             BackgroundColor="#eff6ff">
 
-    <StackLayout Padding="20">
-        <CollectionView x:Name="UsuariosList" SelectionMode="Single" SelectionChanged="UsuariosList_SelectionChanged">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
-                        <Label Text="{Binding Nombre}" FontSize="18"/>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+    <AbsoluteLayout>
+
+        <!-- Fondo con logo -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <!-- Lista de pacientes -->
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="20" Spacing="10">
+                <CollectionView x:Name="UsuariosList"
+                                SelectionMode="Single"
+                                SelectionChanged="UsuariosList_SelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Black"
+                                   CornerRadius="15"
+                                   Padding="15"
+                                   Margin="5">
+                                <Label Text="{Binding Nombre}"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="Black" />
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+    </AbsoluteLayout>
 </ContentPage>

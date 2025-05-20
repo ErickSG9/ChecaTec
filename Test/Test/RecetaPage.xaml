@@ -3,32 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.RecetaPage"
              Title="Recetas"
-             BackgroundColor="White">
+             BackgroundColor="#eff6ff">
 
-    <ScrollView>
-        <StackLayout Padding="15">
-            <CollectionView x:Name="ListaRecetas">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BorderColor="Black" CornerRadius="10" Padding="10" Margin="5">
-                            <StackLayout>
-                                <Label Text="{Binding FechaEmision, StringFormat='Receta - {0:dd/MM/yyyy}'}" 
-                                       FontAttributes="Bold" FontSize="18" HorizontalOptions="Center"/>
-                                <Label Text="{Binding NombreDoctor, StringFormat='Prescrita por: {0}'}" />
-                                <Label Text="{Binding Medicamento, StringFormat='Medicamento: {0}'}"/>
-                                <Label Text="{Binding Dosis, StringFormat='Dosis: {0}'}"/>
-                                <Label Text="{Binding Instrucciones, StringFormat='Instrucciones: {0}'}"/>
-                                <Label Text="{Binding Nota, StringFormat='Notas: {0}'}"/>
-                                <Button Text="Finalizar receta"
-                            BackgroundColor="#007AFF"
-                            TextColor="White"
-                            Clicked="OnDesactivarRecetaClicked"
-                            CommandParameter="{Binding}" />
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
-    </ScrollView>
+    <AbsoluteLayout>
+
+        <!-- Fondo con logo -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               IsVisible="True"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <!-- Contenido principal -->
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="15" Spacing="10">
+                <CollectionView x:Name="ListaRecetas">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Black" CornerRadius="15" Padding="15" Margin="10">
+                                <StackLayout Spacing="10">
+                                    <Label Text="{Binding FechaEmision, StringFormat='Receta - {0:dd/MM/yyyy}'}"
+                                           FontAttributes="Bold"
+                                           FontSize="18"
+                                           HorizontalOptions="Center" />
+                                    <Label Text="{Binding NombreDoctor, StringFormat='Prescrita por: {0}'}" />
+                                    <Label Text="{Binding Medicamento, StringFormat='Medicamento: {0}'}" />
+                                    <Label Text="{Binding Dosis, StringFormat='Dosis: {0}'}" />
+                                    <Label Text="{Binding Instrucciones, StringFormat='Instrucciones: {0}'}" />
+                                    <Label Text="{Binding Nota, StringFormat='Notas: {0}'}" />
+
+                                    <Button Text="Finalizar receta"
+                                            BackgroundColor="#007AFF"
+                                            TextColor="White"
+                                            CornerRadius="15"
+                                            Clicked="OnDesactivarRecetaClicked"
+                                            CommandParameter="{Binding}" />
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+    </AbsoluteLayout>
 </ContentPage>

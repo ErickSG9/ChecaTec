@@ -2,69 +2,73 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.Views.LoginPage"
-             BackgroundColor="White">
+             BackgroundColor="#eff6ff">
 
-    <ScrollView>
-        <StackLayout Padding="30" Spacing="15" VerticalOptions="Center">
+    <Grid>
+        <!-- Fondo de logo -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               IsVisible="True"
+               Grid.RowSpan="1" />
 
-            <!-- Logo -->
-            <Image Source="logo.png"
-                   HeightRequest="120"
-                   HorizontalOptions="Center"
-                   Margin="0,30,0,20"/>
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
 
-            <!-- Usuario / Correo -->
-            <Label Text="Correo"
-                   TextColor="Black"/>
-            <Entry x:Name="entryUsuario"
-                   Placeholder="Email"
-                   Keyboard="Email"
-                   TextColor="Black"
-                   BackgroundColor="#f0f0f0"/>
+                <!-- Título -->
+                <Label Text="ChecaTec"
+                       FontSize="35"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
 
-            <!-- Contraseña -->
-            <Label Text="Contraseña"
-                   TextColor="Black"/>
-            <Entry x:Name="entryContrasena"
-           Placeholder="Contraseña"
-           IsPassword="True"
-           TextColor="Black"
-           BackgroundColor="#f0f0f0"
-           WidthRequest="250"/>
-            <!-- Ajusta el tamaño para que el botón encaje -->
+                <!-- Correo -->
+                <Label Text="Correo electrónico"
+                       FontSize="20"
+                       TextColor="Black"/>
+                <Frame CornerRadius="15" Padding="5" HasShadow="False" BorderColor="Black">
+                    <Entry x:Name="entryUsuario"
+                           Keyboard="Email"
+                           TextColor="Black"
+                           BackgroundColor="Transparent" />
+                </Frame>
 
-            <Button x:Name="btnMostrarContrasena"
-            Text="👁️"
-            BackgroundColor="Transparent"
-            Clicked="MostrarOcultarContrasena_Clicked"/>
+                <!-- Contraseña -->
+                <Label Text="Contraseña"
+                       FontSize="20"
+                       TextColor="Black"/>
+                <Frame CornerRadius="15" Padding="5" HasShadow="False" BorderColor="Black">
+                    <Grid>
+                        <Entry x:Name="entryContrasena"
+                               IsPassword="True"
+                               TextColor="Black"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="FillAndExpand"/>
+                        <Button x:Name="btnMostrarContrasena"
+                                Text="👁️"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Clicked="MostrarOcultarContrasena_Clicked"/>
+                    </Grid>
+                </Frame>
 
-            <!-- Botón Iniciar Sesión -->
-            <Button Text="Iniciar Sesión"
-                    BackgroundColor="#007AFF"
-                    TextColor="White"
-                    CornerRadius="10"
-                    Clicked="IniciarSesion_Clicked"/>
+                <!-- Botón Iniciar sesión -->
+                <Button Text="Iniciar sesión"
+                        BackgroundColor="#007AFF"
+                        TextColor="White"
+                        CornerRadius="15"
+                        Clicked="IniciarSesion_Clicked"/>
 
-            <!-- Botón Registrarse -->
-            <Button Text="Registrarse"
-                    BackgroundColor="#007AFF"
-                    TextColor="White"
-                    CornerRadius="10"
-                    Clicked="IrARegistro_Clicked"/>
-
-            <!-- Olvidé contraseña -->
-            <Label Text="¿Olvidaste tu contraseña?"
-                   TextColor="Black"
-                   HorizontalOptions="Center"
-                   FontSize="Small"
-                   Margin="0,10,0,0"/>
-
-            <!-- Ayuda -->
-            <Label Text="¿Necesitas ayuda?"
-                   TextColor="Black"
-                   HorizontalOptions="Center"
-                   FontSize="Small"/>
-
-        </StackLayout>
-    </ScrollView>
+                <!-- Botón Registrarse -->
+                <Button Text="Registrarse"
+                        BackgroundColor="#007AFF"
+                        TextColor="White"
+                        CornerRadius="15"
+                        Clicked="IrARegistro_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

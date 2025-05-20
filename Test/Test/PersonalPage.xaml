@@ -3,27 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.PersonalPage"
              Title="Personal Médico"
-             BackgroundColor="White">
+             BackgroundColor="#eff6ff">
 
-    <StackLayout Padding="15">
-        <CollectionView x:Name="ListaMedicos">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
-                        <StackLayout Spacing="5">
-                            <Label Text="{Binding NombreCompleto}" FontAttributes="Bold" FontSize="18" />
-                            <Label Text="{Binding Especialidad, StringFormat='Especialidad: {0}'}" />
+    <AbsoluteLayout>
 
-                            <Button Text="Ver Detalles"
-                                    Clicked="OnVerDetallesClicked"
-                                    BackgroundColor="#007ACC"
-                                    TextColor="White"
-                                    CornerRadius="5"
-                                    Padding="5"/>
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+        <!-- Fondo con logo translúcido -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               IsVisible="True"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <!-- Contenido principal -->
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Padding="15" Spacing="10">
+                <CollectionView x:Name="ListaMedicos">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Black" CornerRadius="15" Padding="15" Margin="10">
+                                <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+
+                                    <!-- Nombre y especialidad -->
+                                    <StackLayout Grid.Column="0" Spacing="5">
+                                        <Label Text="{Binding NombreCompleto}" FontAttributes="Bold" FontSize="18" />
+                                        <Label Text="{Binding Especialidad, StringFormat='Especialidad: {0}'}" />
+                                    </StackLayout>
+
+                                    <!-- Botón al lado derecho -->
+                                    <Button Grid.Column="1"
+                                            Text="Ver Detalles"
+                                            Clicked="OnVerDetallesClicked"
+                                            BackgroundColor="#007AFF"
+                                            TextColor="White"
+                                            CornerRadius="15"
+                                            Padding="10,5"
+                                            VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
 </ContentPage>

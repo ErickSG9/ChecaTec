@@ -3,14 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.HistorialPage"
              Title="Historial"
-             BackgroundColor="White">
+             BackgroundColor="#eff6ff">
 
     <AbsoluteLayout>
+
+        <!-- Fondo con logo -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               IsVisible="True"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
+
+        <!-- Contenido principal -->
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="All"
               RowDefinitions="Auto, Auto, *">
 
-            <!-- Botones -->
+            <!-- Botones de navegación -->
             <Grid Grid.Row="0" ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -19,23 +29,23 @@
 
                 <Button Grid.Column="0"
                         Text="HISTORIAL"
-                        BackgroundColor="White"
+                        BackgroundColor="#007aff"
                         FontAttributes="Bold"
-                        TextColor="Black"
+                        TextColor="White"
                         BorderColor="Black"
                         BorderWidth="1" />
 
                 <Button Grid.Column="1"
                         Text="Perfil"
                         Clicked="OnPerfilClicked"
-                        BackgroundColor="White"
+                        BackgroundColor="#007aff"
                         FontAttributes="Bold"
-                        TextColor="Black"
+                        TextColor="White"
                         BorderColor="Black"
                         BorderWidth="1" />
             </Grid>
 
-            <!-- Selector -->
+            <!-- Filtro -->
             <Picker x:Name="FiltroHistorial"
                     Grid.Row="1"
                     Title="Ver"
@@ -46,9 +56,11 @@
                     <x:String>Operaciones</x:String>
                 </Picker.Items>
             </Picker>
-            <!-- Contenedor -->
+
+            <!-- Secciones de historial -->
             <ScrollView Grid.Row="2">
                 <StackLayout Padding="10" Spacing="10">
+
                     <!-- Recetas -->
                     <StackLayout x:Name="RecetasLayout" IsVisible="False">
                         <CollectionView x:Name="ListaRecetas">
@@ -69,6 +81,7 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
+
                     <!-- Consultas -->
                     <StackLayout x:Name="ConsultasLayout" IsVisible="True">
                         <CollectionView x:Name="ListaConsultas">
@@ -92,6 +105,7 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
+
                     <!-- Operaciones -->
                     <StackLayout x:Name="OperacionesLayout" IsVisible="False">
                         <CollectionView x:Name="ListaOperaciones">
@@ -113,23 +127,26 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </StackLayout>
-                    
+
                 </StackLayout>
             </ScrollView>
         </Grid>
 
-        <!-- Botón flotante -->
+        <!-- Botón flotante en esquina inferior derecha -->
         <Button x:Name="BotonAgregar"
-                 Text="＋"
-                AbsoluteLayout.LayoutBounds="1,1,60,60"
-                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Text="＋"
                 BackgroundColor="#007AFF"
                 TextColor="White"
                 CornerRadius="30"
                 FontAttributes="Bold"
                 FontSize="24"
-                Clicked="OnNuevoClicked"
+                WidthRequest="60"
+                HeightRequest="60"
+                AbsoluteLayout.LayoutBounds="1,1,60,60"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                TranslationX="-20"
                 TranslationY="-20"
-                TranslationX="-20" />
+                Clicked="OnNuevoClicked" />
+
     </AbsoluteLayout>
 </ContentPage>
