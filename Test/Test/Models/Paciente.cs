@@ -11,7 +11,6 @@ namespace Test.Models
         public int IdUsuario { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string NumeroSeguro { get; set; }
-        public string Genero { get; set; }
         public double Peso { get; set; }
         public double Altura { get; set; }
         public string Alergias { get; set; }

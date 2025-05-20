@@ -2,73 +2,149 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Test.Agregar"
-             Title="Agregar Operación"
-             BackgroundColor="White">
+             Title="Agregar"
+             BackgroundColor="#eff6ff">
 
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="15">
+    <Grid>
+        <!-- Marca de agua -->
+        <Image Source="logoa.png"
+               Aspect="AspectFill"
+               Opacity="0.08"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               IsVisible="True"/>
 
-            <!-- Picker de selección -->
-            <Picker x:Name="Generar" Title="Generar" SelectedIndexChanged="Generar_SelectedIndexChanged">
-                <Picker.Items>
-                    <x:String>Receta</x:String>
-                    <x:String>Consulta</x:String>
-                    <x:String>Operacion</x:String>
-                </Picker.Items>
-            </Picker>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="20">
 
-            <!-- Sección para CONSULTA -->
-            <StackLayout x:Name="ConsultaLayout" IsVisible="False" Spacing="10">
-                <Label Text="Motivo de la Consulta"/>
-                <Entry x:Name="motivoEntry" Placeholder="Motivo" />
-                <Label Text="Estado"/>
-                <Picker x:Name="estadoCPicker">
-                    <Picker.Items>
-                        <x:String>Programada</x:String>
-                        <x:String>En progreso</x:String>
-                        <x:String>Finalizada</x:String>
-                    </Picker.Items>
-                </Picker>
-                <Entry x:Name="presionEntry" Placeholder="Preción arterial" />
-                <Entry x:Name="frecuenciaEntry" Keyboard="Numeric" Placeholder="Frecuencia cardiaca" />
-                <Entry x:Name="temperaturaEntry" Keyboard="Numeric" Placeholder="Temperatura" />
-                <Label Text="Observaciones"/>
-                <Editor x:Name="observacionesCEditor" HeightRequest="80" />
-                <Button Text="Guardar" Clicked="OnGuardarCClicked" BackgroundColor="#2196F3" TextColor="White"/>
-            </StackLayout>
+                <!-- Picker de selección -->
+                <Label Text="Generar registro" FontSize="20" TextColor="Black"/>
+                <Frame CornerRadius="15" Padding="5" HasShadow="False" BorderColor="Black">
+                    <Picker x:Name="Generar" Title="Selecciona" SelectedIndexChanged="Generar_SelectedIndexChanged">
+                        <Picker.Items>
+                            <x:String>Receta</x:String>
+                            <x:String>Consulta</x:String>
+                            <x:String>Operacion</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
 
-            <!-- Sección para OPERACION -->
-            <StackLayout x:Name="OperacionLayout" IsVisible="False" Padding="20" Spacing="15">
-                <Label Text="Registrar Operación" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
-                <Entry x:Name="tipoEntry" Placeholder="Tipo de operación" />
-                <Entry x:Name="cirujanoEntry" Placeholder="Nombre del cirujano" />
-                <TimePicker x:Name="horaPicker" />
-                <Entry x:Name="quirofanoEntry" Placeholder="Número de quirófano o sala" />
-                <Picker x:Name="estadoOPicker" Title="Estado">
-                    <Picker.Items>
-                        <x:String>Finalizada</x:String>
-                        <x:String>En proceso</x:String>
-                        <x:String>Cancelada</x:String>
-                    </Picker.Items>
-                </Picker>
-                <Editor x:Name="observacionesOEditor" Placeholder="Observaciones..." HeightRequest="100" />
-                <Button Text="Guardar" Clicked="OnGuardarOClicked" BackgroundColor="#2196F3" TextColor="White"/>
-            </StackLayout>
+                <!-- CONSULTA -->
+                <StackLayout x:Name="ConsultaLayout" IsVisible="False" Spacing="15">
+                    <Label Text="Motivo de la Consulta" FontSize="20" TextColor="Black"/>
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="motivoEntry" Placeholder="Motivo" />
+                    </Frame>
 
-            <!-- Sección para RECETA -->
-            <StackLayout x:Name="RecetaLayout" IsVisible="False" Padding="20" Spacing="15">
-                <Label Text="Registrar Receta" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    <Label Text="Estado" FontSize="20" TextColor="Black"/>
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Picker x:Name="estadoCPicker">
+                            <Picker.Items>
+                                <x:String>Programada</x:String>
+                                <x:String>En progreso</x:String>
+                                <x:String>Finalizada</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
 
-                <StackLayout x:Name="MedicamentosLayout" Spacing="15">
-                    <!-- Se agregarán dinámicamente los grupos de entradas aquí -->
+                    <Label Text="Presión arterial" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="presionEntry" Placeholder="Preción arterial" />
+                    </Frame>
+
+                    <Label Text="Frecuencia cardiaca" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="frecuenciaEntry" Keyboard="Numeric" />
+                    </Frame>
+
+                    <Label Text="Temperatura" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="temperaturaEntry" Keyboard="Numeric" />
+                    </Frame>
+
+                    <Label Text="Observaciones" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Editor x:Name="observacionesCEditor" HeightRequest="100" />
+                    </Frame>
+
+                    <Button Text="Guardar"
+                            Clicked="OnGuardarCClicked"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            CornerRadius="15"/>
                 </StackLayout>
 
-                <Button Text="Agregar otro medicamento" Clicked="OnAgregarMedicamentoClicked" />
+                <!-- OPERACION -->
+                <StackLayout x:Name="OperacionLayout" IsVisible="False" Spacing="15">
+                    <Label Text="Registrar Operación" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
-                <Entry x:Name="NotaEntry" Placeholder="Nota general (opcional)" />
-                <Button Text="Guardar" Clicked="OnGuardarRClicked" BackgroundColor="#2196F3" TextColor="White"/>
+                    <Label Text="Tipo de operación" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="tipoEntry" />
+                    </Frame>
+
+                    <Label Text="Nombre del cirujano" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="cirujanoEntry" />
+                    </Frame>
+
+                    <Label Text="Hora de operación" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <TimePicker x:Name="horaPicker" />
+                    </Frame>
+
+                    <Label Text="Número de quirófano o sala" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="quirofanoEntry" />
+                    </Frame>
+
+                    <Label Text="Estado" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Picker x:Name="estadoOPicker">
+                            <Picker.Items>
+                                <x:String>Finalizada</x:String>
+                                <x:String>En proceso</x:String>
+                                <x:String>Cancelada</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+
+                    <Label Text="Observaciones" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Editor x:Name="observacionesOEditor" HeightRequest="100" />
+                    </Frame>
+
+                    <Button Text="Guardar"
+                            Clicked="OnGuardarOClicked"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            CornerRadius="15"/>
+                </StackLayout>
+
+                <!-- RECETA -->
+                <StackLayout x:Name="RecetaLayout" IsVisible="False" Spacing="15">
+                    <Label Text="Registrar Receta" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+                    <StackLayout x:Name="MedicamentosLayout" Spacing="10" />
+
+                    <Button Text="Agregar otro medicamento"
+                            Clicked="OnAgregarMedicamentoClicked"
+                            BackgroundColor="#2296f3"
+                            TextColor="White"
+                            CornerRadius="10" />
+
+                    <Label Text="Nota general (opcional)" />
+                    <Frame CornerRadius="15" Padding="5" BorderColor="Black">
+                        <Entry x:Name="NotaEntry" />
+                    </Frame>
+
+                    <Button Text="Guardar"
+                            Clicked="OnGuardarRClicked"
+                            BackgroundColor="#007AFF"
+                            TextColor="White"
+                            CornerRadius="15"/>
+                </StackLayout>
             </StackLayout>
-
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+    </Grid>
 </ContentPage>

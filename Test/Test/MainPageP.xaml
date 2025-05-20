@@ -27,25 +27,17 @@
             <!-- Imagen centrada -->
             <Image Source="paciente.png"
                    Grid.Row="0"
-                   HeightRequest="250"
+                   HeightRequest="300"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 
             <!-- Botones -->
-            <StackLayout Grid.Row="1" Padding="30" Spacing="20" VerticalOptions="Center">
+            <StackLayout Grid.Row="1" Padding="30" Spacing="25" VerticalOptions="Center">
                 <Button Text="MENSAJES" Clicked="OnMensajesClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="EXPEDIENTE CLINICO" Clicked="OnHistorialClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="RECETA MÉDICA" Clicked="OnRecetaClicked" Style="{StaticResource MenuButtonStyle}" />
                 <Button Text="PERSONAL MÉDICO" Clicked="OnPersonalClicked" Style="{StaticResource MenuButtonStyle}" />
             </StackLayout>
-
-            <!-- Ayuda -->
-            <Label Grid.Row="2"
-                   Text="? Ayuda"
-                   FontSize="Small"
-                   TextColor="Black"
-                   HorizontalOptions="End"
-                   Margin="10"/>
         </Grid>
     </Grid>
 </ContentPage>

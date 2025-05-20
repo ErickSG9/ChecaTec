@@ -32,7 +32,7 @@ namespace Test.Data
             return _database;
         }
 
-        public static void RegistrarUsuario(string nombre, string apellidos, int edad, string telefono, string email, string contrasena, string rol)
+        public static void RegistrarUsuario(string nombre, string apellidos, int edad, string telefono,string genero, string email, string contrasena, string rol)
         {
             var db = GetConnection();
 
@@ -49,7 +49,8 @@ namespace Test.Data
                 Nombre = nombre,
                 Apellidos = apellidos,
                 Edad = edad,
-                Telefono = telefono,    
+                Telefono = telefono,
+                Genero = genero,
                 Email = email,
                 Contrasena = contrasena, 
                 Rol = rol,
@@ -63,7 +64,7 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Usuario>().FirstOrDefault(u => u.Email == email && u.Contrasena == contrasena);
         }
-        public static void RegistrarMedico(int idUsuario, string especialidad, string horario, string clinica, string genero)
+        public static void RegistrarMedico(int idUsuario, string especialidad, string horario, string clinica)
         {
             var db = GetConnection();
 
@@ -73,7 +74,6 @@ namespace Test.Data
                 Especialidad = especialidad,
                 HorarioAtencion = horario,
                 Clinica = clinica,
-                Genero = genero
             };
 
             db.Insert(nuevoMedico);
@@ -191,7 +191,7 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Consulta>().Where(c => c.IdUsuario == idPaciente).ToList();
         }
-        public static void RegistrarPaciente(int idUsuario,DateTime fechaNacimiento,string numeroSeguro,string genero,double peso,double altura,string alergias,string antecedentes,string medicamentos,string vacunas,string discapacidad, string nomE, string parE, string telE)
+        public static void RegistrarPaciente(int idUsuario,DateTime fechaNacimiento,string numeroSeguro,double peso,double altura,string alergias,string antecedentes,string medicamentos,string vacunas,string discapacidad, string nomE, string parE, string telE)
         {
             var db = GetConnection();
 
@@ -200,7 +200,6 @@ namespace Test.Data
                 IdUsuario = idUsuario,
                 FechaNacimiento = fechaNacimiento,
                 NumeroSeguro = numeroSeguro,
-                Genero = genero,
                 Peso = peso,
                 Altura = altura,
                 Alergias = alergias,

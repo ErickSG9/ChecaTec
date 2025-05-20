@@ -20,7 +20,7 @@ namespace Test
             var medicos = usuarios.Select(u =>
             {
                 var medico = Database.GetMedicoPorUsuarioId(u.IdUsuario);
-                var genero = medico?.Genero?.ToLower() ?? "";
+                var genero = u.Genero?.ToLower() ?? "";
 
                 string prefijo = genero == "femenino" ? "Dra." : "Dr.";
                 string nombreCompleto = $"{prefijo} {u.Nombre} {u.Apellidos}";
@@ -36,13 +36,13 @@ namespace Test
                     Especialidad = medico?.Especialidad ?? "Sin asignar",
                     HorarioAtencion = medico?.HorarioAtencion ?? "N/D",
                     Clinica = medico?.Clinica ?? "N/D",
-                    Genero = medico?.Genero ?? "N/D"
+                    Genero = u.Genero ?? "N/D"
                 };
             }).ToList();
 
-
             ListaMedicos.ItemsSource = medicos;
         }
+
 
         private async void OnVerDetallesClicked(object sender, EventArgs e)
         {

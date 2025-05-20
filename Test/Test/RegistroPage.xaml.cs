@@ -95,7 +95,7 @@ namespace Test
                 }
 
                 // Registrar usuario
-                Database.RegistrarUsuario(nombre, apellidos, edad, telefono.ToString(), email, contrasena, rol);
+                Database.RegistrarUsuario(nombre, apellidos, edad, telefono.ToString(),genero, email, contrasena, rol);
 
                 // Obtener ID del nuevo usuario
                 var usuario = Database.GetUsuarioPorId(
@@ -112,7 +112,6 @@ namespace Test
                         usuario.IdUsuario,
                         fechaNacimiento,
                         numeroSeguro,
-                        genero,
                         peso,
                         altura,
                         alergias,
@@ -130,8 +129,7 @@ namespace Test
                         usuario.IdUsuario,
                         especialidad,
                         horario,
-                        clinica,
-                        generoM
+                        clinica
                     );
                 }
 

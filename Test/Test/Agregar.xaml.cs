@@ -107,14 +107,72 @@ namespace Test
 
         private void CrearBloqueMedicamento()
         {
-            var stack = new StackLayout { Spacing = 5 };
+            var stack = new StackLayout
+            {
+                Spacing = 10
+            };
 
-            stack.Children.Add(new Entry { Placeholder = "Medicamento" });
-            stack.Children.Add(new Entry { Placeholder = "Dosis" });
-            stack.Children.Add(new Entry { Placeholder = "Instrucciones" });
+            // Medicamento
+            stack.Children.Add(new Label { Text = "Medicamento", TextColor = Color.Black, FontSize = 20 });
 
+            var medicamentoFrame = new Frame
+            {
+                CornerRadius = 15,
+                Padding = 5,
+                HasShadow = false,
+                BorderColor = Color.Black,
+                BackgroundColor = Color.White,
+                Content = new Entry
+                {
+                    Placeholder = "Nombre del medicamento",
+                    BackgroundColor = Color.Transparent,
+                    TextColor = Color.Black
+                }
+            };
+            stack.Children.Add(medicamentoFrame);
+
+            // Dosis
+            stack.Children.Add(new Label { Text = "Dosis", TextColor = Color.Black, FontSize = 20 });
+
+            var dosisFrame = new Frame
+            {
+                CornerRadius = 15,
+                Padding = 5,
+                HasShadow = false,
+                BorderColor = Color.Black,
+                BackgroundColor = Color.White,
+                Content = new Entry
+                {
+                    Placeholder = "Dosis",
+                    BackgroundColor = Color.Transparent,
+                    TextColor = Color.Black
+                }
+            };
+            stack.Children.Add(dosisFrame);
+
+            // Instrucciones
+            stack.Children.Add(new Label { Text = "Instrucciones", TextColor = Color.Black, FontSize = 20 });
+
+            var instruccionesFrame = new Frame
+            {
+                CornerRadius = 15,
+                Padding = 5,
+                HasShadow = false,
+                BorderColor = Color.Black,
+                BackgroundColor = Color.White,
+                Content = new Entry
+                {
+                    Placeholder = "Instrucciones",
+                    BackgroundColor = Color.Transparent,
+                    TextColor = Color.Black
+                }
+            };
+            stack.Children.Add(instruccionesFrame);
+
+            // Agregar al contenedor principal
             MedicamentosLayout.Children.Add(stack);
         }
+
 
         private void OnAgregarMedicamentoClicked(object sender, EventArgs e)
         {

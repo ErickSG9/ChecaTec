@@ -29,7 +29,7 @@ namespace Test
             // Obtener datos de Usuario y Paciente
             var usuario = Database.GetUsuarioPorId(_idUsuario);
             var paciente = Database.GetPacientePorId(_idPaciente);
-            await DisplayAlert("DEBUG", $"Usuario: {usuario?.IdUsuario} / Paciente: {paciente?.Genero}", "OK");
+            await DisplayAlert("DEBUG", $"Usuario: {usuario?.IdUsuario} / Paciente: {paciente?.NumeroSeguro}", "OK");
 
             if (usuario != null && paciente != null)
             {
@@ -43,7 +43,7 @@ namespace Test
                     Rol = usuario.Rol,
                     FechaRegistro = usuario.FechaRegistro,
 
-                    Genero = paciente.Genero,
+                    Genero = usuario.Genero,
                     Edad = usuario.Edad,
                     Telefono = usuario.Telefono,
                     Peso = paciente.Peso,
