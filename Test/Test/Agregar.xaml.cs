@@ -191,18 +191,35 @@ namespace Test
 
             var recetasFinal = bloques.Select(b =>
             {
-                var entradas = b.Children.OfType<Entry>().ToList();
+                var entradas = b.Children
+                    .OfType<Frame>()
+                    .Select(f => f.Content)
+                    .OfType<Entry>()
+                    .ToList();
+
+                if (entradas.Count < 3)
+                    return null;
+
                 return new
                 {
-                    Medicamento = entradas[0].Text?.Trim(),
-                    Dosis = entradas[1].Text?.Trim(),
-                    Instrucciones = entradas[2].Text?.Trim()
+                    Medicamento = entradas[0].Text?.Trim() ?? "",
+                    Dosis = entradas[1].Text?.Trim() ?? "",
+                    Instrucciones = entradas[2].Text?.Trim() ?? ""
                 };
-            }).Where(x => !string.IsNullOrWhiteSpace(x.Medicamento)).ToList();
+            })
+            .Where(x => x != null && !string.IsNullOrWhiteSpace(x.Medicamento))
+            .ToList();
 
             if (recetasFinal.Count == 0)
             {
                 await DisplayAlert("Error", "Debe ingresar al menos un medicamento con información.", "OK");
+                return;
+            }
+
+            var paciente = Database.GetPacientePorUsuario(receptorId);
+            if (paciente == null)
+            {
+                await DisplayAlert("Error", "No se encontró el paciente para registrar la receta.", "OK");
                 return;
             }
 
@@ -212,12 +229,12 @@ namespace Test
 
             var receta = new Receta
             {
-                IdPaciente = receptorId,
-                IdProfesional = App.UsuarioActual.IdUsuario,
+                IdPaciente = paciente.IdPaciente,
+                IdProfesional = App.UsuarioActual?.IdUsuario ?? 0,
                 Medicamento = medicamentos,
                 Dosis = dosis,
                 Instrucciones = instrucciones,
-                Nota = NotaEntry.Text,
+                Nota = NotaEntry.Text?.Trim() ?? "",
                 FechaEmision = DateTime.Today,
                 Activa = true
             };
@@ -225,6 +242,8 @@ namespace Test
             try
             {
                 Database.InsertarReceta(receta);
+             
+
                 await DisplayAlert("Éxito", "Receta registrada correctamente.", "OK");
                 await Navigation.PopAsync();
             }

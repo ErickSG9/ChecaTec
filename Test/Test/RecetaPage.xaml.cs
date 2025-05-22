@@ -24,7 +24,7 @@ namespace Test
                 return;
             }
 
-            var paciente = Database.GetPacientePorId(usuario.IdUsuario);
+            var paciente = Database.GetPacientePorUsuario(usuario.IdUsuario);
             if (paciente == null)
             {
                 DisplayAlert("Error", "No se encontró el paciente relacionado.", "OK");
@@ -41,6 +41,8 @@ namespace Test
                 receta.Profesional = doctor?.Nombre ?? "Desconocido";
             }
 
+            
+
             ListaRecetas.ItemsSource = recetas;
         }
         private async void OnDesactivarRecetaClicked(object sender, EventArgs e)
@@ -51,7 +53,7 @@ namespace Test
             if (receta == null)
                 return;
 
-            bool confirmacion = await DisplayAlert("Confirmar", "¿Deseas dar por completada esta receta?", "Sí", "No");
+            bool confirmacion = await DisplayAlert("Confirmar", "¿Deseas dar por completado su tratamiento?", "Sí", "No");
 
             if (confirmacion)
             {

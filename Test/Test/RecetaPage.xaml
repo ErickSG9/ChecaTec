@@ -28,7 +28,7 @@
                                            FontAttributes="Bold"
                                            FontSize="18"
                                            HorizontalOptions="Center" />
-                                    <Label Text="{Binding NombreDoctor, StringFormat='Prescrita por: {0}'}" />
+                                    <Label Text="{Binding Profesional, StringFormat='Prescrita por: {0}'}" />
                                     <Label Text="{Binding Medicamento, StringFormat='Medicamento: {0}'}" />
                                     <Label Text="{Binding Dosis, StringFormat='Dosis: {0}'}" />
                                     <Label Text="{Binding Instrucciones, StringFormat='Instrucciones: {0}'}" />

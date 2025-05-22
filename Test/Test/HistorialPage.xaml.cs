@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Test.Data;
+using Test.Models;
 using Xamarin.Forms;
 
 namespace Test
@@ -25,8 +27,7 @@ namespace Test
             int idUsuario = receptorId != 0 ? receptorId : App.UsuarioActual.IdUsuario;
 
             var consultas = Database.ObtenerConsultasPorPaciente(idUsuario)
-                .OrderByDescending(c => c.Fecha)
-                .ToList();
+                .OrderByDescending(c => c.Fecha).ToList();
 
             foreach (var consulta in consultas)
             {
@@ -35,16 +36,23 @@ namespace Test
             }
 
             var operaciones = Database.ObtenerOperacionesPorPaciente(idUsuario)
-                .OrderByDescending(c => c.Fecha)
-                .ToList();
-            var recetas = Database.ObtenerRecetasPorPaciente(idUsuario);
+                .OrderByDescending(c => c.Fecha).ToList();
+            var paciente = Database.GetPacientePorUsuario(idUsuario);
+            var recetas = paciente != null
+                ? Database.ObtenerRecetasPorPaciente(paciente.IdPaciente)
+                : new List<Receta>();
             if (App.UsuarioActual.Rol == "Paciente")
             {
-                recetas = recetas.Where(r => r.Activa == false).ToList();
+                recetas = recetas
+                    .Where(r => r.Activa == false)
+                    .OrderByDescending(r => r.FechaEmision)
+                    .ToList();
             }
             else
             {
-                recetas = recetas.ToList();
+                recetas = recetas
+                    .OrderByDescending(r => r.FechaEmision)
+                    .ToList();
             }
 
             foreach (var receta in recetas)
@@ -104,7 +112,8 @@ namespace Test
         private async void OnPerfilClicked(object sender, EventArgs e)
         {
             var receptor = Database.GetUsuarioPorId(receptorId);
-            var paciente = Database.GetPacientePorId(receptor.IdUsuario);
+            var paciente = Database.GetPacientePorUsuario(receptorId); 
+
             await Navigation.PushAsync(new PacientePage(receptor, paciente));
         }
 

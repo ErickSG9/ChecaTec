@@ -17,8 +17,15 @@ namespace Test.Data
         {
             
             var db = GetConnection();
+
+            db.Execute("DROP TABLE IF EXISTS Usuarios");
+            db.Execute("DROP TABLE IF EXISTS Pacientes");
+            db.Execute("DROP TABLE IF EXISTS Recetas");
+            db.Execute("DROP TABLE IF EXISTS HistorialClinico");
+            db.Execute("DROP TABLE IF EXISTS Chat");
+            db.Execute("DROP TABLE IF EXISTS Consulta");
             
-            
+
             db.CreateTable<Usuario>();
             db.CreateTable<Pacientes>();
             db.CreateTable<Medico>();
@@ -176,6 +183,11 @@ namespace Test.Data
             var db = GetConnection();
             return db.Table<Operacion>().Where(o => o.IdUsuario == idPaciente).ToList();
         }
+        public static Pacientes GetPacientePorUsuario(int idUsuario)
+{
+    var db = GetConnection();
+    return db.Table<Pacientes>().FirstOrDefault(p => p.IdUsuario == idUsuario);
+}
         public static List<Receta> ObtenerRecetasPorPaciente(int idPaciente)
         {
             var db = GetConnection();

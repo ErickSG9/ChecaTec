@@ -51,7 +51,7 @@ namespace Test
                     return;
                 }
 
-                if (!int.TryParse(entryTelefono.Text, out int telefono))
+                if (!double.TryParse(entryTelefono.Text, out double telefono))
                 {
                     await DisplayAlert("Error", "Teléfono inválido", "OK");
                     return;
